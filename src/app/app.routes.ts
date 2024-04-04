@@ -10,6 +10,11 @@ import { SuperadminComponent } from './components/superadmincomponents/superadmi
 import { StoreownerformComponent } from './components/superadmincomponents/storeownerform/storeownerform.component';
 import { StoreownerdetailsComponent } from './components/superadmincomponents/storeownerdetails/storeownerdetails.component';
 import { BranchdetailsComponent } from './components/superadmincomponents/branchdetails/branchdetails.component';
+import { BranchdetailsformComponent } from './components/superadmincomponents/branchdetailsform/branchdetailsform.component';
+import { MedicinedetailsComponent } from './components/superadmincomponents/medicinedetails/medicinedetails.component';
+import { MedicinedetailsformComponent } from './components/superadmincomponents/medicinedetailsform/medicinedetailsform.component';
+import { StoreownerComponent } from './components/storeownercomponents/storeowner/storeowner.component';
+import { InventoryComponent } from './components/storeownercomponents/inventory/inventory.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate:[authguardGuard]},
@@ -19,6 +24,11 @@ export const routes: Routes = [
   { path: "storeownerdetails", component: StoreownerdetailsComponent},
   { path: "storeownerform", component: StoreownerformComponent},
   { path: "branchdetails", component: BranchdetailsComponent},
+  { path: "branchdetailsform", component: BranchdetailsformComponent},
+  { path: "medicinedetails", component: MedicinedetailsComponent},
+  { path: "medicinedetailsform", component: MedicinedetailsformComponent},
+  { path: "storeowner", component: StoreownerComponent},
+  { path: "inventory", component: InventoryComponent},
   { path: 'cart', component: CartComponent},
   { path: 'customerform', component: CustomerformComponent},
   { path: 'orders', component: OrdersComponent},

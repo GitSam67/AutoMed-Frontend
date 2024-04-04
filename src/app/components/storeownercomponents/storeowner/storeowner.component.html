@@ -1,0 +1,20 @@
+<app-storeownerheader></app-storeownerheader>
+<div class="flex">
+    <app-storeownersidepanel></app-storeownersidepanel>
+    <div class="w-3/4 m-20">
+        <div class="mt-8">
+            <button routerLink="/storeownerdetails" (click)="showNewPurchaseForm()" class="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-600 mb-4">New Purchase</button>
+            <div *ngIf="showPurchaseForm">
+                <div class="form-group">
+                    <label for="isNewCustomer">Is this a new customer?</label>
+                    <div class="flex m-5">
+                        <button routerLink="/register" class="bg-green-500 text-white font-bold py-2 px-4 rounded-md hover:bg-green-600 mr-2" (click)="setIsNewCustomer(true)">Yes</button>
+                        <button routerLink="/login" class="bg-red-500 text-white font-bold py-2 px-4 rounded-md hover:bg-red-600" (click)="setIsNewCustomer(false)">No</button>
+                    </div>
+                </div>
+            </div>
+            <button routerLink="/inventory" class="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-600 mb-4">Manage Inventory</button>
+            <button routerLink="/" class="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-600">View Reports</button>
+        </div>
+    </div>
+</div>

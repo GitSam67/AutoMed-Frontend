@@ -38,7 +38,7 @@ export class StoreownerdetailsComponent {
     })
   }
 
-  ToggleDelete(): void{
+  editRow(): void{
 
   }
   deleteRow(): void{

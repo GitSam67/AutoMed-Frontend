@@ -8,5 +8,9 @@ import { Component } from '@angular/core';
   styleUrl: './sadminsidepanel.component.css'
 })
 export class SadminsidepanelComponent {
+  salesamount: number;
 
+  constructor(){
+    this.salesamount = 0;
+  }
 }

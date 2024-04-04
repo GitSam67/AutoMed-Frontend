@@ -34,7 +34,7 @@ export class BranchdetailsComponent implements OnInit{
     })
   }
 
-  ToggleDelete(): void{
+  editRow(): void{
 
   }
   deleteRow(): void{
