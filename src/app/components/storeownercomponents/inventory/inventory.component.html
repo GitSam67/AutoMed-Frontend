@@ -1,0 +1,34 @@
+<app-storeownerheader></app-storeownerheader>
+<div class="flex">
+    <app-storeownersidepanel></app-storeownersidepanel>
+    <div class="w-3/4 m-20">
+        <div *ngIf="inventory.length == 0">
+            <h3>No Data To Show</h3>
+        </div>
+        <div *ngIf="inventory.length > 0" class="flex m-10">
+            <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <th style="border: 1px solid #ddd; padding: 8px;">Inventory Id</th>
+                        <th style="border: 1px solid #ddd; padding: 8px;">Medicine Id</th>
+                        <th style="border: 1px solid #ddd; padding: 8px;">Quantity</th>
+                        <th style="border: 1px solid #ddd; padding: 8px;">Branch Id</th>
+                        <th style="border: 1px solid #ddd; padding: 8px;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of inventory; let i = index">
+                        <td style="border: 1px solid #ddd; padding: 8px;">{{ item.InventoryId }}</td>
+                        <td style="border: 1px solid #ddd; padding: 8px;">{{ item.MedicineId }}</td>
+                        <td style="border: 1px solid #ddd; padding: 8px;">{{ item.Quantity }}</td>
+                        <td style="border: 1px solid #ddd; padding: 8px;">{{ item.BranchId }}</td>
+                        <td style="border: 1px solid #ddd; padding: 8px;">
+                            <button (click)="discardMed(i)" style="padding: 8px; background-color: #f44336; color: white; border: none; cursor: pointer; border-radius: 4px;">Discard</button>
+                            <button (click)="placeOrder(i)" style="padding: 8px; background-color: #0ebe22; color: white; border: none; cursor: pointer; border-radius: 4px;">Place Order</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
