@@ -1,7 +1,6 @@
 <app-superadminheader></app-superadminheader>
 
 <button class="ml-10 mt-8 px-4 py-2 rounded bg-blue-500 hover:bg-blue-600 text-white"><a routerLink="/storeownerform">Add New</a></button>
-<button class="ml-10 mt-8 px-4 py-2 rounded bg-blue-500 hover:bg-blue-600 text-white"><a routerLink="">Update Existing</a></button>
 
 
 <!-- @if (storeowners.length == 0) {
@@ -16,7 +15,6 @@
               <th style="border: 1px solid #ddd; padding: 8px;">Name</th>
               <th style="border: 1px solid #ddd; padding: 8px;">Email</th>
               <th style="border: 1px solid #ddd; padding: 8px;">Branch Name</th>
-              <th style="border: 1px solid #ddd; padding: 8px;"><button (click)="ToggleDelete()" style="padding: 8px; background-color: #4CAF50; color: white; border: none; cursor: pointer; border-radius: 4px;">Enable Delete</button></th>
           </tr>
       </thead>
       <tbody>
@@ -27,12 +25,14 @@
                   <td style="border: 1px solid #ddd; padding: 8px;">{{ strowner.OwnerName }}</td>
                   <td style="border: 1px solid #ddd; padding: 8px;">{{ strowner.Email }}</td>
                   <td style="border: 1px solid #ddd; padding: 8px;">{{ strowner.BranchId }}</td>
-                  @if (canDelete)
-                  {
-                      <td style="border: 1px solid #ddd; padding: 8px;">
-                          <button (click)="deleteRow()" style="padding: 8px; background-color: #f44336; color: white; border: none; cursor: pointer; border-radius: 4px;">Delete</button>
-                      </td>
-                  }
+
+                  <td style="border: 1px solid #ddd; padding: 8px;">
+                    <button (click)="deleteRow()" style="padding: 8px; background-color: #f44336; color: white; border: none; cursor: pointer; border-radius: 4px;">Delete</button>
+                  </td>
+                  <td style="border: 1px solid #ddd; padding: 8px;">
+                    <button (click)="editRow()" style="padding: 8px; background-color: #f44336; color: white; border: none; cursor: pointer; border-radius: 4px;">Edit</button>
+                  </td>
+                  
               </tr>
           }
       </tbody>
