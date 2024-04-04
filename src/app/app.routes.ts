@@ -1,3 +1,4 @@
+import { authguardGuard } from './authguard.guard';
 import { Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -11,7 +12,7 @@ import { StoreownerdetailsComponent } from './components/superadmincomponents/st
 import { BranchdetailsComponent } from './components/superadmincomponents/branchdetails/branchdetails.component';
 
 export const routes: Routes = [
-  { path: 'login', component: LoginComponent },
+  { path: 'login', component: LoginComponent, canActivate:[authguardGuard]},
   { path: 'register', component: RegisterComponent },
   { path: 'customer', component: CustomerComponent},
   { path: "superadmin", component: SuperadminComponent},

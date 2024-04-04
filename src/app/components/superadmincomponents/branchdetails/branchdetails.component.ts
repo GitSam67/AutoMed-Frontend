@@ -23,7 +23,7 @@ export class BranchdetailsComponent implements OnInit{
   ngOnInit(): void {
     this.adminservice.getBranches().subscribe({
       next: (response) => {
-        this.branches = response.records;
+        this.branches = response.Records;
         this.message = response.Message;
         console.log(this.message);
       },

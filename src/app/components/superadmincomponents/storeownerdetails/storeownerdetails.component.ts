@@ -3,7 +3,6 @@ import { StoreOwner } from '../../../Models/app.user.model';
 import { AdminhttpService } from '../../../Services/adminhttp.service';
 import { RouterModule } from '@angular/router';
 import { SuperadminheaderComponent } from '../../reusablecomponents/superadminheader/superadminheader.component';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-storeownerdetails',
@@ -18,22 +17,23 @@ export class StoreownerdetailsComponent {
   // storeowner!: StoreOwner;
   message: string;
 
-  constructor(private adminservice: AdminhttpService, private http: HttpClient){
+  constructor(private adminservice: AdminhttpService){
     this.message = "";
-    this.storeowners = new Array<any>();
+    this.storeowners = new Array<StoreOwner>();
   }
 
   ngOnInit(): void {
     this.adminservice.getStoreOwner().subscribe({
       next: (response) => {
-        this.storeowners = response.records;
+        console.log(response);
+        this.storeowners = response.Records;
         console.log(this.storeowners);
         this.message = response.Message;
         console.log(this.message);
       },
       error: (error) => {
         this.message = `Error: ${error}`;
-        // alert("Error in fetching details of store owners. Please try again"+ this.message);
+        alert("Error in fetching details of store owners. Please try again"+ this.message);
       }
     })
   }
