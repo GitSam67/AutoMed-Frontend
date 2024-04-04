@@ -34,7 +34,7 @@ export class LoginComponent {
         alert(response.Message);
       },
       error:(error)=>{
-        alert(`Error: ${error}`);
+        alert(`Error: Login failed..!! Please Try again`);
       }
     });
     this.router.navigateByUrl('/');
