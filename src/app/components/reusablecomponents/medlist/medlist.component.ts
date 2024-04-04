@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Medicine } from '../../Models/app.medicine.model';
+import { Medicine } from '../../../Models/app.medicine.model';
 import { RouterModule } from '@angular/router';
 
 @Component({
