@@ -1,18 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { StoreOwner } from '../../../Models/app.user.model';
-import { SuperadminheaderComponent } from '../../reusablecomponents/superadminheader/superadminheader.component';
-import { StoreownerformComponent } from '../storeownerform/storeownerform.component';
-import { RouterModule } from '@angular/router';
 import { AdminhttpService } from '../../../Services/adminhttp.service';
+import { RouterModule } from '@angular/router';
+import { SuperadminheaderComponent } from '../../reusablecomponents/superadminheader/superadminheader.component';
 
 @Component({
   selector: 'app-storeownerdetails',
   standalone: true,
-  imports: [SuperadminheaderComponent, StoreownerformComponent, RouterModule],
+  imports: [RouterModule, SuperadminheaderComponent],
   templateUrl: './storeownerdetails.component.html',
   styleUrl: './storeownerdetails.component.css'
 })
-export class StoreownerComponent implements OnInit{
+export class StoreownerdetailsComponent {
   storeowners: StoreOwner[];
   canDelete: boolean = false;
   storeowner: StoreOwner;
@@ -22,13 +21,13 @@ export class StoreownerComponent implements OnInit{
     this.message = "";
     this.storeowners = new Array<any>();
     this.storeowner = new StoreOwner(3,"Deepak","deepak@gmail.com","Mumbai");
-    // this.storeowners.push(
-    //   { OwnerId: 2, Name: "Omkar", Email:"omkar@gmail.com", BranchName: "Bharuch"}
-    // )
+    this.storeowners.push(
+      { OwnerId: 2, Name: "Omkar", Email:"omkar@gmail.com", BranchName: "Bharuch"}
+    )
   }
 
   ngOnInit(): void {
-    this.adminservice.getStoreOwner("").subscribe({
+    this.adminservice.getStoreOwner().subscribe({
       next: (response) => {
         this.storeowners = response.records;
         this.message = response.Message;
@@ -47,5 +46,4 @@ export class StoreownerComponent implements OnInit{
   deleteRow(): void{
 
   }
-  
 }

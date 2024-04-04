@@ -6,7 +6,7 @@
 
 @if (storeowners.length == 0) {
   <h3>No Data To Show</h3>
-} 
+}
 @else {
   <div class="flex m-10">
   <table style="width: 100%; border-collapse: collapse;">
@@ -20,14 +20,14 @@
           </tr>
       </thead>
       <tbody>
-          @for (strowner of storeowners; track $index) 
+          @for (strowner of storeowners; track $index)
           {
-              <tr>  
+              <tr>
                   <td style="border: 1px solid #ddd; padding: 8px;">{{ strowner.OwnerId }}</td>
                   <td style="border: 1px solid #ddd; padding: 8px;">{{ strowner.Name }}</td>
                   <td style="border: 1px solid #ddd; padding: 8px;">{{ strowner.Email }}</td>
                   <td style="border: 1px solid #ddd; padding: 8px;">{{ strowner.BranchName }}</td>
-                  @if (canDelete) 
+                  @if (canDelete)
                   {
                       <td style="border: 1px solid #ddd; padding: 8px;">
                           <button (click)="deleteRow()" style="padding: 8px; background-color: #f44336; color: white; border: none; cursor: pointer; border-radius: 4px;">Delete</button>

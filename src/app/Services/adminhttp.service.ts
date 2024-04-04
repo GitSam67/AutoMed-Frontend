@@ -13,14 +13,13 @@ export class AdminhttpService {
 
   constructor(private http:HttpClient) {
 
-  this.url='https://localhost:7270/'
+  this.url='https://localhost:7243/'
  }
-
- getStoreOwner(token:any):Observable<APIResponse<StoreOwner>>{
+ getStoreOwner():Observable<APIResponse<StoreOwner>>{
   let response:Observable<APIResponse<StoreOwner>>;
   response=this.http.get<APIResponse<StoreOwner>>(`${this.url}api/SuperAdmin/GetStoreOwners`,{
     headers:{
-      'AUTHORIZATION':`Bearer ${token}`
+      "Content-Type": "application/json"
     }
   });
 
