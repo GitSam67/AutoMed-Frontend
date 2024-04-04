@@ -28,7 +28,7 @@ export class StoreownerComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.adminservice.getStoreOwner("").subscribe({
+    this.adminservice.getStoreOwner().subscribe({
       next: (response) => {
         this.storeowners = response.records;
         this.message = response.Message;
