@@ -31,7 +31,7 @@ export class AdminhttpService {
 
   addStoreOwner(owner:StoreOwner):Observable<APIResponse<StoreOwner>>{
     let response:Observable<APIResponse<StoreOwner>>;
-    response=this.http.post<APIResponse<StoreOwner>>(`${this.url}api/SuperAdmin/AddStoreOwner`,{
+    response=this.http.post<APIResponse<StoreOwner>>(`${this.url}api/SuperAdmin/AddStoreOwner`, owner, {
       headers:{
         'Content-Type':'application/json'
       }
@@ -41,7 +41,7 @@ export class AdminhttpService {
 
   editStoreOwner(id:number, owner:StoreOwner):Observable<APIResponse<StoreOwner>>{
     let response:Observable<APIResponse<StoreOwner>>;
-    response=this.http.put<APIResponse<StoreOwner>>(`${this.url}api/SuperAdmin/EditStoreOwner`,{
+    response=this.http.put<APIResponse<StoreOwner>>(`${this.url}api/SuperAdmin/EditStoreOwner${id}`, owner, {
       headers:{
         'Content-Type':'application/json'
       }
@@ -51,7 +51,7 @@ export class AdminhttpService {
 
   deleteStoreOwner(id:number):Observable<APIResponse<StoreOwner>>{
     let response:Observable<APIResponse<StoreOwner>>;
-    response=this.http.delete<APIResponse<StoreOwner>>(`${this.url}api/SuperAdmin/DeleteStoreOwner`,{
+    response=this.http.delete<APIResponse<StoreOwner>>(`${this.url}api/SuperAdmin/DeleteStoreOwner${id}`,{
       headers:{
         'Content-Type':'application/json'
       }
@@ -69,9 +69,9 @@ export class AdminhttpService {
     return response;
   }
 
-  addBranch():Observable<APIResponse<Branch>>{
+  addBranch(branch:Branch):Observable<APIResponse<Branch>>{
     let response:Observable<APIResponse<Branch>>;
-    response=this.http.post<APIResponse<Branch>>(`${this.url}api/SuperAdmin/AddBranch`,{
+    response=this.http.post<APIResponse<Branch>>(`${this.url}api/SuperAdmin/AddBranch`, branch, {
       headers:{
         'Content-Type':'application/json'
       }
@@ -89,9 +89,9 @@ export class AdminhttpService {
     return response;
   }
 
-  addMedicine():Observable<APIResponse<Medicine>>{
+  addMedicine(med:Medicine):Observable<APIResponse<Medicine>>{
     let response:Observable<APIResponse<Medicine>>;
-    response=this.http.post<APIResponse<Medicine>>(`${this.url}api/SuperAdmin/AddMedicine`,{
+    response=this.http.post<APIResponse<Medicine>>(`${this.url}api/SuperAdmin/AddMedicine`, med, {
       headers:{
         'Content-Type':'application/json'
       }
