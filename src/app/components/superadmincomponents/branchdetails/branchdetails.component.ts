@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Branch } from '../../../Models/app.model';
 import { SuperadminheaderComponent } from '../../reusablecomponents/superadminheader/superadminheader.component';
 import { AdminhttpService } from '../../../Services/adminhttp.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-branchdetails',
   standalone: true,
-  imports: [SuperadminheaderComponent],
+  imports: [SuperadminheaderComponent, RouterModule],
   templateUrl: './branchdetails.component.html',
   styleUrl: './branchdetails.component.css'
 })
