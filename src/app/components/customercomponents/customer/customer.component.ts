@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { HeaderComponent } from '../header/header.component';
-import { MedlistComponent } from '../medlist/medlist.component';
+import { HeaderComponent } from '../../reusablecomponents/header/header.component';
+import { MedlistComponent } from '../../reusablecomponents/medlist/medlist.component';
 
 @Component({
   selector: 'app-customer',
