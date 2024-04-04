@@ -1,28 +1,22 @@
 import { Component } from '@angular/core';
-import { Inventory } from '../../../Models/app.model';
+import { Order } from '../../../Models/app.orders.model';
 import { StoreownerheaderComponent } from '../../reusablecomponents/storeownerheader/storeownerheader.component';
 import { StoreownersidepanelComponent } from '../../reusablecomponents/storeownersidepanel/storeownersidepanel.component';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-inventory',
+  selector: 'app-reports',
   standalone: true,
   imports: [StoreownerheaderComponent, StoreownersidepanelComponent, CommonModule],
-  templateUrl: './inventory.component.html',
-  styleUrl: './inventory.component.css'
+  templateUrl: './reports.component.html',
+  styleUrl: './reports.component.css'
 })
-export class InventoryComponent {
-  inventory: Inventory[];
+export class ReportsComponent {
+  orders: Order[] = []; 
+  salesAmount: number = 0; 
 
-  constructor(){
-    this.inventory = new Array<any>();
+  constructor() {
+        
   }
 
-  discardMed(index: number) {
-
-}
-
-placeOrder(index: number) {
-
-}
 }

@@ -3,11 +3,12 @@ import { StoreownerheaderComponent } from '../../reusablecomponents/storeownerhe
 import { StoreownersidepanelComponent } from '../../reusablecomponents/storeownersidepanel/storeownersidepanel.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-storeowner',
   standalone: true,
-  imports: [StoreownerheaderComponent, StoreownersidepanelComponent, CommonModule, FormsModule],
+  imports: [StoreownerheaderComponent, StoreownersidepanelComponent, CommonModule, FormsModule, RouterModule],
   templateUrl: './storeowner.component.html',
   styleUrl: './storeowner.component.css'
 })

@@ -3,7 +3,6 @@ import { Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { CustomerComponent } from './components/customercomponents/customer/customer.component';
-import { CartComponent } from './components/customercomponents/cart/cart.component';
 import { CustomerformComponent } from './components/customercomponents/customerform/customerform.component';
 import { OrdersComponent } from './components/customercomponents/orders/orders.component';
 import { SuperadminComponent } from './components/superadmincomponents/superadmin/superadmin.component';
@@ -15,6 +14,8 @@ import { MedicinedetailsComponent } from './components/superadmincomponents/medi
 import { MedicinedetailsformComponent } from './components/superadmincomponents/medicinedetailsform/medicinedetailsform.component';
 import { StoreownerComponent } from './components/storeownercomponents/storeowner/storeowner.component';
 import { InventoryComponent } from './components/storeownercomponents/inventory/inventory.component';
+import { ReportsComponent } from './components/superadmincomponents/reports/reports.component';
+import { BranchreportsComponent } from './components/storeownercomponents/branchreports/branchreports.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate:[authguardGuard]},
@@ -27,9 +28,10 @@ export const routes: Routes = [
   { path: "branchdetailsform", component: BranchdetailsformComponent},
   { path: "medicinedetails", component: MedicinedetailsComponent},
   { path: "medicinedetailsform", component: MedicinedetailsformComponent},
+  { path: "branchreports", component: BranchreportsComponent},
   { path: "storeowner", component: StoreownerComponent},
   { path: "inventory", component: InventoryComponent},
-  { path: 'cart', component: CartComponent},
+  { path: "reports", component: ReportsComponent},
   { path: 'customerform', component: CustomerformComponent},
   { path: 'orders', component: OrdersComponent},
   { path: '', redirectTo: '/login', pathMatch: 'full' },

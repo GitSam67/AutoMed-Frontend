@@ -1,0 +1,41 @@
+<app-storeownerheader></app-storeownerheader>
+<div class="flex">
+    <app-storeownersidepanel></app-storeownersidepanel>
+    <div class="w-3/4 m-20">
+        <div class="bg-white p-4 rounded-lg shadow mb-4">
+            <h2 class="text-xl font-semibold mb-4">Sales</h2>
+            <div class="bg-blue-500 text-white px-4 py-2 rounded-lg mb-4">
+                <p class="text-lg font-semibold">{{ salesAmount }}</p>
+            </div>
+        </div>
+
+        <!-- Orders Table -->
+        <div *ngIf="orders.length == 0">
+            <h3>No Data To Show</h3>
+        </div>
+        <div *ngIf="orders.length > 0" class="flex m-10">
+            <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <th style="border: 1px solid #ddd; padding: 8px;">Order Id</th>
+                        <th style="border: 1px solid #ddd; padding: 8px;">Customer Id</th>
+                        <th style="border: 1px solid #ddd; padding: 8px;">Medicines</th>
+                        <th style="border: 1px solid #ddd; padding: 8px;">Purchase Time</th>
+                        <th style="border: 1px solid #ddd; padding: 8px;">Total Bill</th>
+                        <th style="border: 1px solid #ddd; padding: 8px;">Branch Id</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let order of orders">
+                        <td style="border: 1px solid #ddd; padding: 8px;">{{ order.OrderId }}</td>
+                        <td style="border: 1px solid #ddd; padding: 8px;">{{ order.CustomerId }}</td>
+                        <td style="border: 1px solid #ddd; padding: 8px;">{{ order.Medicines }}</td>
+                        <td style="border: 1px solid #ddd; padding: 8px;">{{ order.PurchaseTime }}</td>
+                        <td style="border: 1px solid #ddd; padding: 8px;">{{ order.TotalBill }}</td>
+                        <td style="border: 1px solid #ddd; padding: 8px;">{{ order.BranchId }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
