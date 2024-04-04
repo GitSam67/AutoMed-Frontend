@@ -1,0 +1,47 @@
+
+<app-superadminheader></app-superadminheader>
+
+<button class="ml-10 mt-8 px-4 py-2 rounded bg-blue-500 hover:bg-blue-600 text-white"><a routerLink="/medicinedetailsform">Add New</a></button>
+
+@if (medicines.length == 0) {
+  <h3>No Data To Show</h3>
+} 
+@else {
+  <div class="flex m-10">
+  <table style="width: 100%; border-collapse: collapse;">
+      <thead>
+          <tr>
+              <th style="border: 1px solid #ddd; padding: 8px;">Medicine Id</th>
+              <th style="border: 1px solid #ddd; padding: 8px;">Medicin Name</th>
+              <th style="border: 1px solid #ddd; padding: 8px;">Unit Price</th>
+              <th style="border: 1px solid #ddd; padding: 8px;">Expiry Date</th>
+              <th style="border: 1px solid #ddd; padding: 8px;">Batch number</th>
+              <th style="border: 1px solid #ddd; padding: 8px;">Manufacturer</th>
+              <th style="border: 1px solid #ddd; padding: 8px;">Category</th>
+          </tr>
+      </thead>
+      <tbody>
+          @for (medicine of medicines; track $index) 
+          {
+              <tr>  
+                  <td style="border: 1px solid #ddd; padding: 8px;">{{ medicine.MedicineId }}</td>
+                  <td style="border: 1px solid #ddd; padding: 8px;">{{ medicine.Name }}</td>
+                  <td style="border: 1px solid #ddd; padding: 8px;">{{ medicine.Manufacturer }}</td>
+                  <td style="border: 1px solid #ddd; padding: 8px;">{{ medicine.UnitPrice }}</td>
+                  <td style="border: 1px solid #ddd; padding: 8px;">{{ medicine.BatchNumber }}</td>
+                  <td style="border: 1px solid #ddd; padding: 8px;">{{ medicine.ExpiryDate }}</td>
+                  <td style="border: 1px solid #ddd; padding: 8px;">{{ medicine.Category }}</td>
+                  
+                    <td style="border: 1px solid #ddd; padding: 8px;">
+                        <button (click)="deleteRow()" style="padding: 8px; background-color: #f44336; color: white; border: none; cursor: pointer; border-radius: 4px;">Delete</button>
+                    </td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">
+                        <button (click)="editRow()" style="padding: 8px; background-color: #14073c; color: white; border: none; cursor: pointer; border-radius: 4px;">Edit</button>
+                    </td>
+            
+              </tr>
+          }
+      </tbody>
+  </table>
+</div>
+}

@@ -21,7 +21,7 @@ export class StoreownerComponent implements OnInit{
   constructor(private adminservice: AdminhttpService){
     this.message = "";
     this.storeowners = new Array<any>();
-    this.storeowner = new StoreOwner(3,"Deepak","deepak@gmail.com","Mumbai");
+    this.storeowner = new StoreOwner(3,"Deepak","deepak@gmail.com",2);
     // this.storeowners.push(
     //   { OwnerId: 2, Name: "Omkar", Email:"omkar@gmail.com", BranchName: "Bharuch"}
     // )
@@ -41,7 +41,7 @@ export class StoreownerComponent implements OnInit{
     })
   }
 
-  ToggleDelete(): void{
+  editRow(): void{
 
   }
   deleteRow(): void{

@@ -9,6 +9,9 @@ import { SuperadminComponent } from './components/superadmincomponents/superadmi
 import { StoreownerComponent } from './components/superadmincomponents/storeownerdetails/storeownerdetails.component';
 import { StoreownerformComponent } from './components/superadmincomponents/storeownerform/storeownerform.component';
 import { BranchdetailsComponent } from './components/superadmincomponents/branchdetails/branchdetails.component';
+import { BranchdetailsformComponent } from './components/superadmincomponents/branchdetailsform/branchdetailsform.component';
+import { MedicinedetailsComponent } from './components/superadmincomponents/medicinedetails/medicinedetails.component';
+import { MedicinedetailsformComponent } from './components/superadmincomponents/medicinedetailsform/medicinedetailsform.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -18,6 +21,9 @@ export const routes: Routes = [
   { path: "storeownerdetails", component: StoreownerComponent},
   { path: "storeownerform", component: StoreownerformComponent},
   { path: "branchdetails", component: BranchdetailsComponent},
+  { path: "branchdetailsform", component: BranchdetailsformComponent},
+  { path: "medicinedetails", component: MedicinedetailsComponent},
+  { path: "medicinedetailsform", component: MedicinedetailsformComponent},
   { path: 'cart', component: CartComponent},
   { path: 'customerform', component: CustomerformComponent},
   { path: 'orders', component: OrdersComponent},
