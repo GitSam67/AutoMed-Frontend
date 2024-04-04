@@ -1,36 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { StoreOwner } from '../../../Models/app.user.model';
-import { SuperadminheaderComponent } from '../../reusablecomponents/superadminheader/superadminheader.component';
-import { StoreownerformComponent } from '../storeownerform/storeownerform.component';
-import { RouterModule } from '@angular/router';
 import { AdminhttpService } from '../../../Services/adminhttp.service';
+import { RouterModule } from '@angular/router';
+import { SuperadminheaderComponent } from '../../reusablecomponents/superadminheader/superadminheader.component';
 
 @Component({
   selector: 'app-storeownerdetails',
   standalone: true,
-  imports: [SuperadminheaderComponent, StoreownerformComponent, RouterModule],
+  imports: [RouterModule, SuperadminheaderComponent],
   templateUrl: './storeownerdetails.component.html',
   styleUrl: './storeownerdetails.component.css'
 })
-export class StoreownerComponent implements OnInit{
+export class StoreownerdetailsComponent {
   storeowners: StoreOwner[];
   canDelete: boolean = false;
-  storeowner: StoreOwner;
+  // storeowner!: StoreOwner;
   message: string;
 
   constructor(private adminservice: AdminhttpService){
     this.message = "";
-    this.storeowners = new Array<any>();
-    this.storeowner = new StoreOwner(3,"Deepak","deepak@gmail.com",2);
-    // this.storeowners.push(
-    //   { OwnerId: 2, Name: "Omkar", Email:"omkar@gmail.com", BranchName: "Bharuch"}
-    // )
+    this.storeowners = new Array<StoreOwner>();
   }
 
   ngOnInit(): void {
     this.adminservice.getStoreOwner().subscribe({
       next: (response) => {
-        this.storeowners = response.records;
+        console.log(response);
+        this.storeowners = response.Records;
+        console.log(this.storeowners);
         this.message = response.Message;
         console.log(this.message);
       },
@@ -47,5 +44,4 @@ export class StoreownerComponent implements OnInit{
   deleteRow(): void{
 
   }
-  
 }

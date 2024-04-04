@@ -16,7 +16,7 @@ export class User{
 export class StoreOwner{
     constructor(
         public OwnerId: number,
-        public Name: string,
+        public OwnerName: string,
         public Email: string,
         public BranchId: number
     ){}

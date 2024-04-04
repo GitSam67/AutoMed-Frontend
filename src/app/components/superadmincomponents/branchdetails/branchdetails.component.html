@@ -2,10 +2,10 @@
 
 <button class="ml-10 mt-8 px-4 py-2 rounded bg-blue-500 hover:bg-blue-600 text-white"><a routerLink="/branchdetailsform">Add New</a></button>
 
-@if (branches.length == 0) {
+<!-- @if (branches.length == 0) {
   <h3>No Data To Show</h3>
-} 
-@else {
+} -->
+<!-- @else { -->
   <div class="flex m-10">
   <table style="width: 100%; border-collapse: collapse;">
       <thead>
@@ -16,7 +16,7 @@
           </tr>
       </thead>
       <tbody>
-          @for (branch of branches; track $index) 
+          @for (branch of branches; track $index)
           {
               <tr>  
                   <td style="border: 1px solid #ddd; padding: 8px;">{{ branch.BranchId }}</td>
@@ -35,4 +35,4 @@
       </tbody>
   </table>
 </div>
-}
+<!-- } -->
