@@ -25,27 +25,27 @@ export class RegisterComponent {
       return;
     }
 
-    const newUser: User = {
+  //   const newUser: User = {
 
-      CustomerName: this.name,
-      Email: this.email,
-      Age: '',
-      Gender: '',
-      BloodGroup: '',
-      ContactNo: '',
-      Address: '',
-      Prescription: '',
-    };
+  //     CustomerName: this.name,
+  //     Email: this.email,
+  //     Age: '',
+  //     Gender: '',
+  //     BloodGroup: '',
+  //     ContactNo: '',
+  //     Address: '',
+  //     Prescription: '',
+  //   };
 
-    this.userService.register(newUser).subscribe(
-      () => {
-        alert('Registration successful');
-        this.router.navigate(['/login']);
-      },
-      (error) => {
-        console.error('Registration failed:', error);
-        alert('Registration failed. Please try again later.');
-      }
-    );
-  }
+  //   this.userService.register(newUser).subscribe(
+  //     () => {
+  //       alert('Registration successful');
+  //       this.router.navigate(['/login']);
+  //     },
+  //     (error) => {
+  //       console.error('Registration failed:', error);
+  //       alert('Registration failed. Please try again later.');
+  //     }
+  //   );
+   }
 }

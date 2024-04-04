@@ -3,8 +3,7 @@
 <button class="ml-10 mt-8 px-4 py-2 rounded bg-blue-500 hover:bg-blue-600 text-white"><a routerLink="/storeownerform">Add New</a></button>
 <button class="ml-10 mt-8 px-4 py-2 rounded bg-blue-500 hover:bg-blue-600 text-white"><a routerLink="">Update Existing</a></button>
 
-
-<!-- @if (storeowners.length == 0) {
+<!-- @if (branches.length == 0) {
   <h3>No Data To Show</h3>
 } -->
 <!-- @else { -->
@@ -12,21 +11,19 @@
   <table style="width: 100%; border-collapse: collapse;">
       <thead>
           <tr>
-              <th style="border: 1px solid #ddd; padding: 8px;">Owner Id</th>
-              <th style="border: 1px solid #ddd; padding: 8px;">Name</th>
-              <th style="border: 1px solid #ddd; padding: 8px;">Email</th>
+              <th style="border: 1px solid #ddd; padding: 8px;">Branch Id</th>
               <th style="border: 1px solid #ddd; padding: 8px;">Branch Name</th>
+              <th style="border: 1px solid #ddd; padding: 8px;">Address</th>
               <th style="border: 1px solid #ddd; padding: 8px;"><button (click)="ToggleDelete()" style="padding: 8px; background-color: #4CAF50; color: white; border: none; cursor: pointer; border-radius: 4px;">Enable Delete</button></th>
           </tr>
       </thead>
       <tbody>
-          @for (strowner of storeowners; track $index)
+          @for (branch of branches; track $index)
           {
               <tr>
-                  <td style="border: 1px solid #ddd; padding: 8px;">{{ strowner.OwnerId }}</td>
-                  <td style="border: 1px solid #ddd; padding: 8px;">{{ strowner.Name }}</td>
-                  <td style="border: 1px solid #ddd; padding: 8px;">{{ strowner.Email }}</td>
-                  <td style="border: 1px solid #ddd; padding: 8px;">{{ strowner.BranchId }}</td>
+                  <td style="border: 1px solid #ddd; padding: 8px;">{{ branch.BranchId }}</td>
+                  <td style="border: 1px solid #ddd; padding: 8px;">{{ branch.BranchName }}</td>
+                  <td style="border: 1px solid #ddd; padding: 8px;">{{ branch.Address }}</td>
                   @if (canDelete)
                   {
                       <td style="border: 1px solid #ddd; padding: 8px;">

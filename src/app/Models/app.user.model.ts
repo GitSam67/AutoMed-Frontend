@@ -18,6 +18,6 @@ export class StoreOwner{
         public OwnerId: number,
         public Name: string,
         public Email: string,
-        public BranchName: string
+        public BranchId: number
     ){}
 }

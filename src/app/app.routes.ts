@@ -8,6 +8,7 @@ import { OrdersComponent } from './components/customercomponents/orders/orders.c
 import { SuperadminComponent } from './components/superadmincomponents/superadmin/superadmin.component';
 import { StoreownerformComponent } from './components/superadmincomponents/storeownerform/storeownerform.component';
 import { StoreownerdetailsComponent } from './components/superadmincomponents/storeownerdetails/storeownerdetails.component';
+import { BranchdetailsComponent } from './components/superadmincomponents/branchdetails/branchdetails.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -16,6 +17,7 @@ export const routes: Routes = [
   { path: "superadmin", component: SuperadminComponent},
   { path: "storeownerdetails", component: StoreownerdetailsComponent},
   { path: "storeownerform", component: StoreownerformComponent},
+  { path: "branchdetails", component: BranchdetailsComponent},
   { path: 'cart', component: CartComponent},
   { path: 'customerform', component: CustomerformComponent},
   { path: 'orders', component: OrdersComponent},
