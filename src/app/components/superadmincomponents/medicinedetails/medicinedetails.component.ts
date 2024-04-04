@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Medicine } from '../../../Models/app.medicine.model';
-import { SuperadminComponent } from '../superadmin/superadmin.component';
 import { SuperadminheaderComponent } from '../../reusablecomponents/superadminheader/superadminheader.component';
 
 @Component({
