@@ -1,4 +1,4 @@
-export class User{
+export class Customer{
     [x:string]:any;
     constructor(
         public CustomerId: number,
