@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { Medicine } from '../../../Models/app.medicine.model';
 import { Router } from 'express';
 import { AdminhttpService } from '../../../Services/adminhttp.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-medicinedetailsform',
   standalone: true,
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './medicinedetailsform.component.html',
   styleUrl: './medicinedetailsform.component.css'
 })

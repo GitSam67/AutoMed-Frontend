@@ -1,18 +1,18 @@
 <div class="flex justify-center items-center h-screen bg-gray-200">
     <div class="p-8 bg-white rounded-lg shadow-lg">
         <h2 class="text-2xl font-semibold mb-4">Add New Branch</h2>
-        <form>
-            <div class="mb-4">
+        <form onsubmit="addBranch()">
+            <!-- <div class="mb-4">
                 <label class="block text-sm font-medium mb-2">Branch Id</label>
-                <input type="text"class="w-full px-3 py-2 border rounded-md" placeholder="Enter Branch Id" />
-            </div>
+                <input [(ngModel)]="BranchId" type="text"class="w-full px-3 py-2 border rounded-md" placeholder="Enter Branch Id" />
+            </div> -->
             <div class="mb-4">
                 <label class="block text-sm font-medium mb-2">Branch Name</label>
-                <input type="text"class="w-full px-3 py-2 border rounded-md" placeholder="Enter Branch Name" />
+                <input [(ngModel)]="BranchName" type="text"class="w-full px-3 py-2 border rounded-md" placeholder="Enter Branch Name" />
             </div>
             <div class="mb-4">
                 <label class="block text-sm font-medium mb-2">Address</label>
-                <input type="email" class="w-full px-3 py-2 border rounded-md" placeholder="Enter Address" />
+                <input [(ngModel)]="Address" type="email" class="w-full px-3 py-2 border rounded-md" placeholder="Enter Address" />
             </div>
             <button type="submit" class="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-600">Add Branch</button>
         </form>

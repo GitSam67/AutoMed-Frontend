@@ -4,11 +4,12 @@ import { StoreOwner } from '../../../Models/app.user.model';
 import { StoreownerhttpService } from '../../../Services/storeownerhttp.service';
 import { Router } from 'express';
 import { AdminhttpService } from '../../../Services/adminhttp.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-storeownerform',
   standalone: true,
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './storeownerform.component.html',
   styleUrl: './storeownerform.component.css'
 })

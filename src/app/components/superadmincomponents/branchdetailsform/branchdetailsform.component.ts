@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { Branch } from '../../../Models/app.model';
 import { Router } from 'express';
 import { AdminhttpService } from '../../../Services/adminhttp.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-branchdetailsform',
   standalone: true,
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './branchdetailsform.component.html',
   styleUrl: './branchdetailsform.component.css'
 })

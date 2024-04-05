@@ -23,7 +23,7 @@
                         <td style="border: 1px solid #ddd; padding: 8px;">{{ item.Quantity }}</td>
                         <td style="border: 1px solid #ddd; padding: 8px;">{{ item.BranchId }}</td>
                         <td style="border: 1px solid #ddd; padding: 8px;">
-                            <button (click)="discardMed(i)" style="padding: 8px; background-color: #f44336; color: white; border: none; cursor: pointer; border-radius: 4px;">Discard</button>
+                            <button (click)="checkIfExpired(i)" style="padding: 8px; background-color: #f44336; color: white; border: none; cursor: pointer; border-radius: 4px;">Discard</button>
                             <button (click)="placeOrder(i)" style="padding: 8px; background-color: #0ebe22; color: white; border: none; cursor: pointer; border-radius: 4px;">Place Order</button>
                         </td>
                     </tr>

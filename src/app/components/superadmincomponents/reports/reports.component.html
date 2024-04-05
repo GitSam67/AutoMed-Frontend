@@ -1,6 +1,6 @@
-<app-storeownerheader></app-storeownerheader>
+<app-superadminheader></app-superadminheader>
 <div class="flex">
-    <app-storeownersidepanel></app-storeownersidepanel>
+    <app-sadminsidepanel></app-sadminsidepanel>
     <div class="w-3/4 m-20">
         <div class="bg-white p-4 rounded-lg shadow mb-4">
             <h2 class="text-xl font-semibold mb-4">Sales</h2>
@@ -9,7 +9,6 @@
             </div>
         </div>
 
-        <!-- Orders Table -->
         <div *ngIf="orders.length == 0">
             <h3>No Data To Show</h3>
         </div>
