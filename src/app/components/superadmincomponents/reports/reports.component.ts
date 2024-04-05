@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { Order } from '../../../Models/app.orders.model';
-import { StoreownerheaderComponent } from '../../reusablecomponents/storeownerheader/storeownerheader.component';
-import { StoreownersidepanelComponent } from '../../reusablecomponents/storeownersidepanel/storeownersidepanel.component';
 import { CommonModule } from '@angular/common';
+import { SuperadminheaderComponent } from '../../reusablecomponents/superadminheader/superadminheader.component';
+import { SadminsidepanelComponent } from '../../reusablecomponents/sadminsidepanel/sadminsidepanel.component';
 
 @Component({
   selector: 'app-reports',
   standalone: true,
-  imports: [StoreownerheaderComponent, StoreownersidepanelComponent, CommonModule],
+  imports: [SuperadminheaderComponent, SadminsidepanelComponent, CommonModule],
   templateUrl: './reports.component.html',
   styleUrl: './reports.component.css'
 })
