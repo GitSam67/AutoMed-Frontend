@@ -3,6 +3,7 @@ import { Branch } from '../../../Models/app.model';
 import { SuperadminheaderComponent } from '../../reusablecomponents/superadminheader/superadminheader.component';
 import { AdminhttpService } from '../../../Services/adminhttp.service';
 import { RouterModule } from '@angular/router';
+import { Medicine } from '../../../Models/app.medicine.model';
 
 @Component({
   selector: 'app-branchdetails',
@@ -15,10 +16,12 @@ export class BranchdetailsComponent implements OnInit{
   branches: Branch[];
   message: string;
   canDelete: boolean = true;
+  medicines: Medicine[];
 
   constructor(private adminservice:AdminhttpService){
     this.message="";
     this.branches = new Array<any>();
+    this.medicines = new Array<any>();
   }
 
   ngOnInit(): void {
@@ -36,7 +39,6 @@ export class BranchdetailsComponent implements OnInit{
   }
 
   editRow(): void{
-
   }
   deleteRow(): void{
 

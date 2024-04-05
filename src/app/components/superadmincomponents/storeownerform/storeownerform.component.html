@@ -1,22 +1,22 @@
 <div class="flex justify-center items-center h-screen bg-gray-200">
     <div class="p-8 bg-white rounded-lg shadow-lg">
         <h2 class="text-2xl font-semibold mb-4">Add New Store Owner</h2>
-        <form>
-            <div class="mb-4">
+        <form onsubmit="addStoreOwner()">
+            <!-- <div class="mb-4">
                 <label class="block text-sm font-medium mb-2" for="ownerId">Owner Id</label>
                 <input type="text" id="ownerId" name="ownerId" class="w-full px-3 py-2 border rounded-md" placeholder="Enter Owner Id" />
-            </div>
+            </div> -->
             <div class="mb-4">
                 <label class="block text-sm font-medium mb-2" for="name">Name</label>
-                <input type="text" id="name" name="name" class="w-full px-3 py-2 border rounded-md" placeholder="Enter Name" />
+                <input [(ngModel)]="name" type="text" id="name" name="name" class="w-full px-3 py-2 border rounded-md" placeholder="Enter Name" />
             </div>
             <div class="mb-4">
                 <label class="block text-sm font-medium mb-2" for="email">Email</label>
-                <input type="email" id="email" name="email" class="w-full px-3 py-2 border rounded-md" placeholder="Enter Email" />
+                <input [(ngModel)]="email" type="email" id="email" name="email" class="w-full px-3 py-2 border rounded-md" placeholder="Enter Email" />
             </div>
             <div class="mb-4">
-                <label class="block text-sm font-medium mb-2" for="branchId">Branch Name</label>
-                <input type="number" id="branchId" name="branchId" class="w-full px-3 py-2 border rounded-md" placeholder="Enter Branch Name" />
+                <label class="block text-sm font-medium mb-2" for="branchId">Branch Id</label>
+                <input [(ngModel)]="Branch" type="number" id="branchId" name="branchId" class="w-full px-3 py-2 border rounded-md" placeholder="Enter Branch Id" />
             </div>
             <button type="submit" class="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-600">Add Store Owner</button>
         </form>

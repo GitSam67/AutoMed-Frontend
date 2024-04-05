@@ -1,11 +1,11 @@
 export class Medicine{
     [x:string]:any;
     constructor(
-        public MedicineId: string,
+        public MedicineId: number,
         public Name: string,
         public Manufacturer: string,
         public UnitPrice: number,
-        public BatchNumber: number,
+        public BatchNumber: string,
         public ExpiryDate: Date,
         public Category: string
     ){};

@@ -14,7 +14,6 @@ import { SuperadminheaderComponent } from '../../reusablecomponents/superadminhe
 export class StoreownerdetailsComponent {
   storeowners: StoreOwner[];
   canDelete: boolean = false;
-  // storeowner!: StoreOwner;
   message: string;
 
   constructor(private adminservice: AdminhttpService){
@@ -38,10 +37,34 @@ export class StoreownerdetailsComponent {
     })
   }
 
-  editRow(): void{
-
+  editRow(id:number, owner:StoreOwner): void{
+    this.adminservice.editStoreOwner(id, owner).subscribe({
+      next: (response) => {
+        console.log(response);
+        this.storeowners = response.Records;
+        console.log(this.storeowners);
+        this.message = response.Message;
+        console.log(this.message);
+      },
+      error: (error) => {
+        this.message = `Error: ${error}`;
+        alert("Error in updating details of store owners. Please try again"+ this.message);
+      }
+    })
   }
-  deleteRow(): void{
-
+  deleteRow(id:number): void{
+    this.adminservice.deleteStoreOwner(id).subscribe({
+      next: (response) => {
+        console.log(response);
+        this.storeowners = response.Records;
+        console.log(this.storeowners);
+        this.message = response.Message;
+        console.log(this.message);
+      },
+      error: (error) => {
+        this.message = `Error: ${error}`;
+        alert("Error in deleting details of store owners. Please try again"+ this.message);
+      }
+    })
   }
 }
