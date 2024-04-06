@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { StoreOwner } from '../../../Models/app.user.model';
 import { AdminhttpService } from '../../../Services/adminhttp.service';
 import { RouterModule } from '@angular/router';
@@ -11,7 +11,7 @@ import { SuperadminheaderComponent } from '../../reusablecomponents/superadminhe
   templateUrl: './storeownerdetails.component.html',
   styleUrl: './storeownerdetails.component.css'
 })
-export class StoreownerdetailsComponent {
+export class StoreownerdetailsComponent implements OnInit{
   storeowners: StoreOwner[];
   canDelete: boolean = false;
   message: string;
@@ -22,9 +22,9 @@ export class StoreownerdetailsComponent {
   }
 
   ngOnInit(): void {
+    console.log("get store owner");
     this.adminservice.getStoreOwner().subscribe({
       next: (response) => {
-        console.log(response);
         this.storeowners = response.Records;
         console.log(this.storeowners);
         this.message = response.Message;
@@ -52,6 +52,7 @@ export class StoreownerdetailsComponent {
       }
     })
   }
+
   deleteRow(id:number): void{
     this.adminservice.deleteStoreOwner(id).subscribe({
       next: (response) => {

@@ -20,6 +20,7 @@ export class AdminhttpService {
  }
 
  getStoreOwner():Observable<APIResponse<StoreOwner>>{
+  console.log("service called");
     let response:Observable<APIResponse<StoreOwner>>;
     response=this.http.get<APIResponse<StoreOwner>>(`${this.url}api/SuperAdmin/GetStoreOwners`,{
       headers:{
@@ -41,7 +42,7 @@ export class AdminhttpService {
 
   editStoreOwner(id:number, owner:StoreOwner):Observable<APIResponse<StoreOwner>>{
     let response:Observable<APIResponse<StoreOwner>>;
-    response=this.http.put<APIResponse<StoreOwner>>(`${this.url}api/SuperAdmin/EditStoreOwner${id}`, owner, {
+    response=this.http.put<APIResponse<StoreOwner>>(`${this.url}api/SuperAdmin/EditStoreOwner/${id}`, owner, {
       headers:{
         'Content-Type':'application/json'
       }
@@ -51,7 +52,7 @@ export class AdminhttpService {
 
   deleteStoreOwner(id:number):Observable<APIResponse<StoreOwner>>{
     let response:Observable<APIResponse<StoreOwner>>;
-    response=this.http.delete<APIResponse<StoreOwner>>(`${this.url}api/SuperAdmin/DeleteStoreOwner${id}`,{
+    response=this.http.delete<APIResponse<StoreOwner>>(`${this.url}api/SuperAdmin/DeleteStoreOwner/${id}`,{
       headers:{
         'Content-Type':'application/json'
       }
@@ -121,7 +122,7 @@ export class AdminhttpService {
 
   getSales(id:any):Observable<APIResponse<Order>>{
     let response:Observable<APIResponse<Order>>;
-    response=this.http.get<APIResponse<Order>>(`${this.url}api/SuperAdmin/GetSalesReport${id}`,{
+    response=this.http.get<APIResponse<Order>>(`${this.url}api/SuperAdmin/GetSalesReport/${id}`,{
       headers:{
         'Content-Type':'application/json'
       }

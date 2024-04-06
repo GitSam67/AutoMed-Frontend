@@ -1,13 +1,24 @@
-<form [formGroup]="loginForm" (ngSubmit)="login()">
-  <div class="mb-4">
-    <label class="block text-sm font-medium mb-2" for="email">Email</label>
-    <input type="email" [(ngModel)]="email" id="email" formControlName="email" class="w-full px-3 py-2 border rounded-md" placeholder="Enter your email" />
-    <div  *ngIf="loginForm.controls['email'].dirty && !loginForm.controls['email'].valid" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">Invalid email</div>
+<div class="bg-gray-200 pt-2">
+  <div class="font-bold text-3xl ml-7">AutoMed</div>
+  <div class="h-screen flex justify-center items-center">
+      <div class="p-8 bg-white rounded-lg shadow-lg">
+        <h2 class="text-2xl font-semibold mb-4">Login</h2>
+        <form>
+          <div class="mb-4">
+            <label [(ngModel)]="email" class="block text-sm font-medium mb-2" for="email">Email</label>
+            <input type="email" id="email" name="email" class="w-full px-3 py-2 border rounded-md" placeholder="Enter your email" />
+          </div>
+          <div class="mb-4">
+            <label class="block text-sm font-medium mb-2" for="password">Password</label>
+            <input [(ngModel)]="password" type="password" id="password" name="password" class="w-full px-3 py-2 border rounded-md" placeholder="Enter your password" />
+          </div>
+          <!-- <button (click)="login()" class="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-600">Login</button> -->
+          <button class="w-full my-2 bg-blue-500 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-600"><a routerLink="/customerform">Login</a></button>
+          <button class="w-full my-2 bg-blue-500 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-600"><a routerLink="/storeowner">Store Owner</a></button>
+          <button class="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-600"><a routerLink="/superadmin">Superadmin</a></button>
+
+        </form>
+        <p class="text-gray-600 mt-4">Don't have an account? <a routerLink="/register" class="text-blue-500">Register here</a></p>
+      </div>
   </div>
-  <div class="mb-4">
-    <label class="block text-sm font-medium mb-2" for="password">Password</label>
-    <input type="password" [(ngModel)]="password" id="password" formControlName="password" class="w-full px-3 py-2 border rounded-md" placeholder="Enter your password" />
-    <div  *ngIf="loginForm.controls['email'].dirty && !loginForm.controls['email'].valid" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">Invalid email</div>
   </div>
-  <button type="submit" [disabled]="loginForm.invalid" class="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-600">Login</button>
-</form>

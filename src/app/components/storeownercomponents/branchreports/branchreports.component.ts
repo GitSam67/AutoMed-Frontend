@@ -13,8 +13,8 @@ import { StoreownerhttpService } from '../../../Services/storeownerhttp.service'
   styleUrl: './branchreports.component.css'
 })
 export class BranchreportsComponent implements OnInit{
-  orders: Order[] = []; 
-  salesAmount: number = 0; 
+  orders: Order[] = [];
+  salesAmount: number = 0;
 
   constructor(private strService: StoreownerhttpService){
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HeaderComponent } from '../../reusablecomponents/header/header.component';
 import { Medicine } from '../../../Models/app.medicine.model';
 import { AdminhttpService } from '../../../Services/adminhttp.service';
+import { CustomerhttpService } from '../../../Services/customerhttp.service';
 
 @Component({
   selector: 'app-buymedicine',
@@ -13,12 +14,16 @@ import { AdminhttpService } from '../../../Services/adminhttp.service';
 export class BuymedicineComponent implements OnInit{
   medicines: Medicine[];
   message: string;
-  constructor(private adminService: AdminhttpService){
+  constructor(private adminService: AdminhttpService, private customerService: CustomerhttpService){
     this.medicines = new Array<any>();
     this.message = "";
   }
 
   ngOnInit(): void {
+
+    // var token = sessionStorage.getItem('token');
+    // this.customerService
+
     this.adminService.getMedicines().subscribe({
       next: (response) => {
         this.medicines = response.Records;
@@ -32,8 +37,18 @@ export class BuymedicineComponent implements OnInit{
     })
   }
 
-  buyMedicine(): void{
-    
-  }
+  // buyMedicine(): void{
+  //   this.customerService.generateMedicalBill().subscribe({
+  //     next: (response) => {
+  //       this.medicines = response.Records;
+  //       this.message = response.Message;
+  //       console.log(this.message);
+  //     },
+  //     error: (error) => {
+  //       this.message = `Error: ${error}`;
+  //       alert("Error in executing order. Please try again"+ this.message);
+  //     }
+  //   })
+  // }
 
 }

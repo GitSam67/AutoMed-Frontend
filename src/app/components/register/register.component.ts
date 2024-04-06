@@ -23,11 +23,12 @@ export class RegisterComponent {
     this.user = new AppUser('', '', '', '', '');
   }
 
-  register(): void {
+  register() {
 
     if (this.password !== this.confirmPassword) {
+      console.log(this.password);
+      console.log(this.confirmPassword);
       alert('Passwords do not match');
-      return;
     }
 
     const newUser: AppUser = {
@@ -42,6 +43,7 @@ export class RegisterComponent {
     this.securityService.register(newUser).subscribe({
       next:(response)=>{
         alert(response.Message);
+        this.router.navigateByUrl('/login');
       },
       error:(error)=>{
         alert(`Error: ${error}`);

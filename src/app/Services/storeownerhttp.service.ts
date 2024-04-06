@@ -20,7 +20,7 @@ export class StoreownerhttpService {
 
  placeOrder(id:any, orders:any):Observable<APIResponse<any>>{
     let response:Observable<APIResponse<any>>;
-    response=this.http.post<APIResponse<any>>(`${this.url}api/StoreOwner/PlaceOrder${id}`, orders ,{
+    response=this.http.post<APIResponse<any>>(`${this.url}api/StoreOwner/PlaceOrder/${id}`, orders ,{
       headers:{
         'Content-Type':'application/json'
       }
@@ -30,7 +30,7 @@ export class StoreownerhttpService {
 
   removeStock(id:any, orders:any):Observable<APIResponse<any>>{
     let response:Observable<APIResponse<any>>;
-    response=this.http.put<APIResponse<any>>(`${this.url}api/StoreOwner/RemoveStock${id}`, orders ,{
+    response=this.http.put<APIResponse<any>>(`${this.url}api/StoreOwner/RemoveStock/${id}`, orders ,{
       headers:{
         'Content-Type':'application/json'
       }
@@ -40,7 +40,7 @@ export class StoreownerhttpService {
 
   getInventory(id:any):Observable<APIResponse<any>>{
     let response:Observable<APIResponse<any>>;
-    response=this.http.get<APIResponse<any>>(`${this.url}api/StoreOwner/GetInventory${id}`,{
+    response=this.http.get<APIResponse<any>>(`${this.url}api/StoreOwner/GetInventory/${id}`,{
       headers:{
         'Content-Type':'application/json'
       }
@@ -50,7 +50,7 @@ export class StoreownerhttpService {
 
   getCashBalance(id:any):Observable<APIResponse<any>>{
     let response:Observable<APIResponse<any>>;
-    response=this.http.get<APIResponse<any>>(`${this.url}api/StoreOwner/GetCashBalance${id}`,{
+    response=this.http.get<APIResponse<any>>(`${this.url}api/StoreOwner/GetCashBalance/${id}`,{
       headers:{
         'Content-Type':'application/json'
       }
@@ -60,7 +60,7 @@ export class StoreownerhttpService {
 
   getTotalSales(id:any):Observable<APIResponse<any>>{
     let response:Observable<APIResponse<any>>;
-    response=this.http.get<APIResponse<any>>(`${this.url}api/StoreOwner/GetTotalSales${id}`,{
+    response=this.http.get<APIResponse<any>>(`${this.url}api/StoreOwner/GetTotalSales/${id}`,{
       headers:{
         'Content-Type':'application/json'
       }
@@ -81,7 +81,7 @@ export class StoreownerhttpService {
 
   getSales(id:any):Observable<APIResponse<Order>>{
     let response:Observable<APIResponse<Order>>;
-    response=this.http.get<APIResponse<Order>>(`${this.url}api/SuperAdmin/GetSalesReport${id}`,{
+    response=this.http.get<APIResponse<Order>>(`${this.url}api/SuperAdmin/GetSalesReport/${id}`,{
       headers:{
         'Content-Type':'application/json'
       }
@@ -91,7 +91,7 @@ export class StoreownerhttpService {
 
   checkForExpiry(id:any):Observable<APIResponse<Medicine>>{
     let response:Observable<APIResponse<Medicine>>;
-    response=this.http.get<APIResponse<Medicine>>(`${this.url}api/StoreOwner/CheckForExpiry${id}`,{
+    response=this.http.get<APIResponse<Medicine>>(`${this.url}api/StoreOwner/CheckForExpiry/${id}`,{
       headers:{
         'Content-Type':'application/json'
       }
@@ -101,7 +101,7 @@ export class StoreownerhttpService {
 
   checkForStockLevel(id:any):Observable<APIResponse<Medicine>>{
     let response:Observable<APIResponse<Medicine>>;
-    response=this.http.get<APIResponse<Medicine>>(`${this.url}api/StoreOwner/CheckForStockLevel${id}`,{
+    response=this.http.get<APIResponse<Medicine>>(`${this.url}api/StoreOwner/CheckForStockLevel/${id}`,{
       headers:{
         'Content-Type':'application/json'
       }

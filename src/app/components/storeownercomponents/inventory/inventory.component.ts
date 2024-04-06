@@ -43,7 +43,7 @@ export class InventoryComponent implements OnInit{
   }
 
 // checkIfExpired(){
-  
+
 // }
 
 placeOrder(index: number) {

@@ -1,4 +1,3 @@
-import { authguardGuard } from './authguard.guard';
 import { Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -18,7 +17,7 @@ import { ReportsComponent } from './components/superadmincomponents/reports/repo
 import { BranchreportsComponent } from './components/storeownercomponents/branchreports/branchreports.component';
 
 export const routes: Routes = [
-  { path: 'login', component: LoginComponent, canActivate:[authguardGuard]},
+  { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'customer', component: CustomerComponent},
   { path: "superadmin", component: SuperadminComponent},
@@ -34,6 +33,6 @@ export const routes: Routes = [
   { path: "reports", component: ReportsComponent},
   { path: 'customerform', component: CustomerformComponent},
   { path: 'orders', component: OrdersComponent},
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/register', pathMatch: 'full' },
   { path: '**', redirectTo: '/login' }
 ];

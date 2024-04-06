@@ -17,7 +17,7 @@ export class SecurityhttpService {
 
  register(user:AppUser):Observable<SecurityResponse>{
     let response:Observable<SecurityResponse>;
-    response=this.http.get<SecurityResponse>(`${this.url}api/Security/register`,{
+    response=this.http.post<SecurityResponse>(`${this.url}api/Security/register`, user, {
       headers:{
         'Content-Type':'application/json'
       }
@@ -27,12 +27,23 @@ export class SecurityhttpService {
 
   login(user:LoginUser):Observable<SecurityResponse>{
     let response:Observable<SecurityResponse>;
-    response=this.http.get<SecurityResponse>(`${this.url}api/Security/login`,{
+    response=this.http.post<SecurityResponse>(`${this.url}api/Security/login`, user, {
       headers:{
         'Content-Type':'application/json'
       }
     });
     return response;
   }
+
+  getUserInfo(token:string):Observable<APIResponse<any>>{
+    let response:Observable<APIResponse<any>>;
+    response=this.http.get<APIResponse<any>>(`${this.url}api/Security/GetCurrentUser/${token}`, {
+      headers:{
+        'Content-Type':'application/json'
+      }
+    });
+    return response;
+  }
+
 
 }

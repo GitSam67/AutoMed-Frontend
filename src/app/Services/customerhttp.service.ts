@@ -38,7 +38,7 @@ export class CustomerhttpService {
 
   checkAvailability(id:any):Observable<APIResponse<any>>{
     let response:Observable<APIResponse<any>>;
-    response=this.http.get<APIResponse<any>>(`${this.url}api/Customer/CheckAvailableMedicines${id}`, {
+    response=this.http.get<APIResponse<any>>(`${this.url}api/Customer/CheckAvailableMedicines/${id}`, {
       headers:{
         'Content-Type':'application/json'
       }
@@ -54,7 +54,7 @@ export class CustomerhttpService {
       branchName: branchName
     };
     let response:Observable<APIResponse<any>>;
-    response=this.http.post<APIResponse<any>>(`${this.url}api/Customer/GenerateMedicalBill${id}`, requestBody, {
+    response=this.http.post<APIResponse<any>>(`${this.url}api/Customer/GenerateMedicalBill/${id}`, requestBody, {
       headers:{
         'Content-Type':'application/json'
       }
@@ -64,7 +64,7 @@ export class CustomerhttpService {
 
   viewMedicalBill(id:any):Observable<APIResponse<any>>{
     let response:Observable<APIResponse<any>>;
-    response=this.http.get<APIResponse<any>>(`${this.url}api/Customer/ViewMedicalBill${id}`, {
+    response=this.http.get<APIResponse<any>>(`${this.url}api/Customer/ViewMedicalBill/${id}`, {
       headers:{
         'Content-Type':'application/json'
       }

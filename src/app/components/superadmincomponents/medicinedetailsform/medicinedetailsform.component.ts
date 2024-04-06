@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Medicine } from '../../../Models/app.medicine.model';
-import { Router } from 'express';
 import { AdminhttpService } from '../../../Services/adminhttp.service';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-medicinedetailsform',

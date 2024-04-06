@@ -48,13 +48,13 @@ export class LoginComponent{
       }
     });
 
-    // if(sessionStorage.getItem('role') == "SuperAdmin")
-    //   this.router.navigateByUrl('/superadmin');
-    // else if(sessionStorage.getItem('role') == "StoreOwner")
-    //   this.router.navigateByUrl('/storeowner');
-    // else if(sessionStorage.getItem('role') == "Customer")
-    //   this.router.navigateByUrl('/customerform');
-    // else
-    this.router.navigateByUrl('/');
+    if(sessionStorage.getItem('role') == "SuperAdmin")
+      this.router.navigateByUrl('/superadmin');
+    else if(sessionStorage.getItem('role') == "StoreOwner")
+      this.router.navigateByUrl('/storeowner');
+    else if(sessionStorage.getItem('role') == "Customer")
+      this.router.navigateByUrl('/customerform');
+    else
+      this.router.navigateByUrl('/');
   }
 }
