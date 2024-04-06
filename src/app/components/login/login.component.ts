@@ -29,9 +29,6 @@ export class LoginComponent{
 
   login(): void {
 
-    if (this.loginForm.invalid) {
-      return;
-    }
     const authUser: LoginUser = {
       Email: this.email,
       Password: this.password
@@ -39,22 +36,23 @@ export class LoginComponent{
 
     this.securityService.login(authUser).subscribe({
       next:(response)=>{
+        console.log(response);
         sessionStorage.setItem('token',response.Token);
         sessionStorage.setItem('role',response.Role);
         alert(response.Message);
+
+        if(sessionStorage.getItem('role') == "SuperAdmin")
+          this.router.navigateByUrl('/superadmin');
+        else if(sessionStorage.getItem('role') == "StoreOwner")
+          this.router.navigateByUrl('/storeowner');
+        else if(sessionStorage.getItem('role') == "Customer")
+          this.router.navigateByUrl('/customerform');
+        else
+          this.router.navigateByUrl('/');
       },
       error:(error)=>{
         alert(`Error: Login failed..!! Please Try again`);
       }
     });
-
-    if(sessionStorage.getItem('role') == "SuperAdmin")
-      this.router.navigateByUrl('/superadmin');
-    else if(sessionStorage.getItem('role') == "StoreOwner")
-      this.router.navigateByUrl('/storeowner');
-    else if(sessionStorage.getItem('role') == "Customer")
-      this.router.navigateByUrl('/customerform');
-    else
-      this.router.navigateByUrl('/');
   }
 }

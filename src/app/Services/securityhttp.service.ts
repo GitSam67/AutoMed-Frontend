@@ -26,6 +26,7 @@ export class SecurityhttpService {
   }
 
   login(user:LoginUser):Observable<SecurityResponse>{
+    console.log("login service called");
     let response:Observable<SecurityResponse>;
     response=this.http.post<SecurityResponse>(`${this.url}api/Security/login`, user, {
       headers:{
