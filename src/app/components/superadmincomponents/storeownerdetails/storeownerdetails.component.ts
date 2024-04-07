@@ -72,6 +72,7 @@ export class StoreownerdetailsComponent implements OnInit{
   }
 
   deleteRow(id:number): void{
+    alert(`Confirm delete for store owner with id: ${id} ?`);
     this.adminservice.deleteStoreOwner(id).subscribe({
       next: (response) => {
         console.log(response);

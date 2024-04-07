@@ -5,30 +5,46 @@
         <div *ngIf="inventory.length == 0">
             <h3>No Data To Show</h3>
         </div>
-        <div *ngIf="inventory.length > 0" class="flex m-10">
+        <div *ngIf="inventory.length > 0" class="flex-col m-10">
             <table style="width: 100%; border-collapse: collapse;">
                 <thead>
                     <tr>
                         <th style="border: 1px solid #ddd; padding: 8px;">Inventory Id</th>
-                        <th style="border: 1px solid #ddd; padding: 8px;">Medicine Id</th>
+                        <th style="border: 1px solid #ddd; padding: 8px;">Medicine Name</th>
                         <th style="border: 1px solid #ddd; padding: 8px;">Quantity</th>
-                        <th style="border: 1px solid #ddd; padding: 8px;">Branch Id</th>
-                        <th style="border: 1px solid #ddd; padding: 8px;">Actions</th>
+                        <th style="border: 1px solid #ddd; padding: 8px;">Branch</th>
+                        <th colspan="2" style="border: 1px solid #ddd; padding: 8px;">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let item of inventory; let i = index">
-                        <td style="border: 1px solid #ddd; padding: 8px;">{{ item.InventoryId }}</td>
-                        <td style="border: 1px solid #ddd; padding: 8px;">{{ item.MedicineId }}</td>
-                        <td style="border: 1px solid #ddd; padding: 8px;">{{ item.Quantity }}</td>
-                        <td style="border: 1px solid #ddd; padding: 8px;">{{ item.BranchId }}</td>
-                        <td style="border: 1px solid #ddd; padding: 8px;">
-                            <button (click)="checkIfExpired(i)" style="padding: 8px; background-color: #f44336; color: white; border: none; cursor: pointer; border-radius: 4px;">Discard</button>
-                            <button (click)="placeOrder(i)" style="padding: 8px; background-color: #0ebe22; color: white; border: none; cursor: pointer; border-radius: 4px;">Place Order</button>
+
+                        <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{ item.InventoryId }}</td>
+                        <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{ this.medName.get(item.MedicineId) }}</td>
+                        <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{ item.Quantity }}</td>
+                        <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{ this.branchName.get(item.BranchId) }}</td>
+
+                        <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">
+                          <button (click)="PlaceOrder(this.medName.get(item.MedicineId))" style="padding: 8px; background-color: #0ebe22; color: white; border: none; cursor: pointer; border-radius: 4px;">Buy Item</button>
                         </td>
+                        <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">
+                          <button (click)="DiscardStock(this.medName.get(item.MedicineId))" style="padding: 8px; background-color: #f44336; color: white; border: none; cursor: pointer; border-radius: 4px;">Discard</button>
+                        </td>
+
                     </tr>
+
                 </tbody>
+
             </table>
+
+            <div *ngIf="placeorder" class="mt-10 w-3/4 mx-auto border flex items-center px-10 py-3 border rounded-lg">
+              <div class="mr-20 text-lg">{{this.name}}</div>
+              <div>
+                <input [(ngModel)]="qty" type="number" id="qty" name="qty" min="0" class="w-full px-3 py-2 border rounded-md" placeholder="Enter Quantity" />
+              </div>
+              <div (click)="ReStock(this.order.set(this.name, this.qty), this.branchId)" class="bg-green-600 text-white p-2 border rounded-lg font-bold text-lg ml-20 cursor-pointer hover:bg-green-500">Place Order</div>
+            </div>
+
         </div>
     </div>
 </div>

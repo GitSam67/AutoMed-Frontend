@@ -36,9 +36,9 @@ export class SecurityhttpService {
     return response;
   }
 
-  getUserInfo(token:string):Observable<APIResponse<any>>{
-    let response:Observable<APIResponse<any>>;
-    response=this.http.get<APIResponse<any>>(`${this.url}api/Security/GetCurrentUser/${token}`, {
+  getUserInfo(token:string):Observable<APIResponse<object>>{
+    let response:Observable<APIResponse<object>>;
+    response=this.http.get<APIResponse<object>>(`${this.url}api/Security/GetCurrentUser/${token}`, {
       headers:{
         'Content-Type':'application/json'
       }

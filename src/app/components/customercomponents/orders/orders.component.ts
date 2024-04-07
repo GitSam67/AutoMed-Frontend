@@ -19,9 +19,9 @@ export class OrdersComponent {
     this.medicines.push(
       { MedicineId: 1, Name: "Paracetamol", Manufacturer: "SKPL", UnitPrice: 20, BatchNumber: '2', ExpiryDate: new Date(), Category: "AntiHistamines"},
     )
-    this.orders.push(
-      { OrderId: 1, CustomerId: 1, Medicines: [this.medicines[0], this.medicines[1]], PurchaseTime: new Date(), TotalBill: 500, BranchId: 2}
-    );
+    // this.orders.push(
+    //   { OrderId: 1, CustomerId: 1, Medicines: [this.medicines[0], this.medicines[1]], PurchaseTime: new Date(), TotalBill: 500, BranchId: 2}
+    // );
 
   }
 }

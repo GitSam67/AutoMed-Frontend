@@ -18,7 +18,7 @@ export class StoreownerhttpService {
   this.url='https://localhost:7243/'
  }
 
- placeOrder(id:any, orders:any):Observable<APIResponse<any>>{
+ placeOrder(orders:any, id:any):Observable<APIResponse<any>>{
     let response:Observable<APIResponse<any>>;
     response=this.http.post<APIResponse<any>>(`${this.url}api/StoreOwner/PlaceOrder/${id}`, orders ,{
       headers:{
