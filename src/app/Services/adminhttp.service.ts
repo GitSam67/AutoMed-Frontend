@@ -62,11 +62,7 @@ export class AdminhttpService {
 
   getBranches():Observable<APIResponse<Branch>>{
     let response:Observable<APIResponse<Branch>>;
-    response=this.http.get<APIResponse<Branch>>(`${this.url}api/SuperAdmin/GetBranches`,{
-      headers:{
-        'Content-Type':'application/json'
-      }
-    });
+    response=this.http.get<APIResponse<Branch>>(`${this.url}api/SuperAdmin/GetBranches`);
     return response;
   }
 

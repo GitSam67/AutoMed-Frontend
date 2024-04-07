@@ -43,7 +43,9 @@ export class RegisterComponent {
     this.securityService.register(newUser).subscribe({
       next:(response)=>{
         alert(response.Message);
-        this.router.navigateByUrl('/login');
+        sessionStorage.setItem('name', this.name);
+        sessionStorage.setItem('email', this.email);
+        this.router.navigate(['customerform'], {queryParams: { name: this.name , email: this.email} });
       },
       error:(error)=>{
         alert(`Error: ${error}`);
