@@ -26,9 +26,9 @@ export class CustomerhttpService {
     return response;
   }
 
-  getBranches():Observable<APIResponse<Branch>>{
-    let response:Observable<APIResponse<Branch>>;
-    response=this.http.get<APIResponse<Branch>>(`${this.url}api/SuperAdmin/GetBranches`,{
+  getBranches():Observable<APIResponse<any>>{
+    let response:Observable<APIResponse<any>>;
+    response=this.http.get<APIResponse<any>>(`${this.url}api/SuperAdmin/GetBranches`,{
       headers:{
         'Content-Type':'application/json'
       }
@@ -38,7 +38,7 @@ export class CustomerhttpService {
 
   checkAvailability(id:any):Observable<APIResponse<any>>{
     let response:Observable<APIResponse<any>>;
-    response=this.http.get<APIResponse<any>>(`${this.url}api/Customer/CheckAvailableMedicines/${id}`, {
+    response=this.http.post<APIResponse<any>>(`${this.url}api/Customer/CheckAvailableMedicines/${id}`, {
       headers:{
         'Content-Type':'application/json'
       }
@@ -46,12 +46,12 @@ export class CustomerhttpService {
     return response;
   }
 
-  generateMedicalBill(id:any, orders:any, claim:number, branchName:string):Observable<APIResponse<any>>{
+  generateMedicalBill(id:any, orders:any, claim:number, branchId:number):Observable<APIResponse<any>>{
     const requestBody = {
       id: id,
       orders: orders,
       claim: claim,
-      branchName: branchName
+      branchId: branchId
     };
     let response:Observable<APIResponse<any>>;
     response=this.http.post<APIResponse<any>>(`${this.url}api/Customer/GenerateMedicalBill/${id}`, requestBody, {
@@ -62,9 +62,9 @@ export class CustomerhttpService {
     return response;
   }
 
-  viewMedicalBill(id:any):Observable<APIResponse<any>>{
+  viewMedicalBill(id:any, orderId:any):Observable<APIResponse<any>>{
     let response:Observable<APIResponse<any>>;
-    response=this.http.get<APIResponse<any>>(`${this.url}api/Customer/ViewMedicalBill/${id}`, {
+    response=this.http.post<APIResponse<any>>(`${this.url}api/Customer/ViewMedicalBill/${id}`, orderId, {
       headers:{
         'Content-Type':'application/json'
       }

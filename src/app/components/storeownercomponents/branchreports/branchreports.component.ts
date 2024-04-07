@@ -20,7 +20,7 @@ export class BranchreportsComponent implements OnInit{
 
   }
   ngOnInit(): void {
-    this.strService.getSales(1).subscribe({
+    this.strService.getSalesReport(1).subscribe({
     next:(response)=>{
       this.orders = response.Records;
     },

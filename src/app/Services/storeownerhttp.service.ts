@@ -68,9 +68,20 @@ export class StoreownerhttpService {
     return response;
   }
 
-  getBranches():Observable<APIResponse<Branch>>{
-    let response:Observable<APIResponse<Branch>>;
-    response=this.http.get<APIResponse<Branch>>(`${this.url}api/SuperAdmin/GetBranches`,{
+  // getBranches():Observable<APIResponse<Branch>>{
+  //   let response:Observable<APIResponse<Branch>>;
+  //   response=this.http.get<APIResponse<Branch>>(`${this.url}api/SuperAdmin/GetBranches`,{
+  //     headers:{
+  //       'Content-Type':'application/json'
+  //     }
+  //   });
+  //   return response;
+  // }
+
+
+  getSalesReport(id:any):Observable<APIResponse<any>>{
+    let response:Observable<APIResponse<any>>;
+    response=this.http.get<APIResponse<any>>(`${this.url}api/StoreOwner/GetSalesReport/${id}`,{
       headers:{
         'Content-Type':'application/json'
       }
@@ -78,10 +89,9 @@ export class StoreownerhttpService {
     return response;
   }
 
-
-  getSales(id:any):Observable<APIResponse<Order>>{
-    let response:Observable<APIResponse<Order>>;
-    response=this.http.get<APIResponse<Order>>(`${this.url}api/SuperAdmin/GetSalesReport/${id}`,{
+  checkForExpiry(id:any):Observable<APIResponse<any>>{
+    let response:Observable<APIResponse<any>>;
+    response=this.http.get<APIResponse<any>>(`${this.url}api/StoreOwner/CheckForExpiry/${id}`,{
       headers:{
         'Content-Type':'application/json'
       }
@@ -89,25 +99,14 @@ export class StoreownerhttpService {
     return response;
   }
 
-  checkForExpiry(id:any):Observable<APIResponse<Medicine>>{
-    let response:Observable<APIResponse<Medicine>>;
-    response=this.http.get<APIResponse<Medicine>>(`${this.url}api/StoreOwner/CheckForExpiry/${id}`,{
+  checkForStockLevel(id:any):Observable<APIResponse<any>>{
+    let response:Observable<APIResponse<any>>;
+    response=this.http.get<APIResponse<any>>(`${this.url}api/StoreOwner/CheckForStockLevel/${id}`,{
       headers:{
         'Content-Type':'application/json'
       }
     });
     return response;
   }
-
-  checkForStockLevel(id:any):Observable<APIResponse<Medicine>>{
-    let response:Observable<APIResponse<Medicine>>;
-    response=this.http.get<APIResponse<Medicine>>(`${this.url}api/StoreOwner/CheckForStockLevel/${id}`,{
-      headers:{
-        'Content-Type':'application/json'
-      }
-    });
-    return response;
-  }
-
 
 }

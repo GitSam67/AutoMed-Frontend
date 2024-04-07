@@ -25,7 +25,7 @@ export class ReportsComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.adminservice.getSales(0).subscribe({
+    this.adminservice.getSalesReport(0).subscribe({
       next: (response) => {
         this.orders = response.Records;
         this.message = response.Message;

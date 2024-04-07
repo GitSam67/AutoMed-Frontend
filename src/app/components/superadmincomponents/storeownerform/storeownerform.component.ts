@@ -5,6 +5,7 @@ import { StoreownerhttpService } from '../../../Services/storeownerhttp.service'
 import { AdminhttpService } from '../../../Services/adminhttp.service';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { response } from 'express';
 
 @Component({
   selector: 'app-storeownerform',
@@ -36,9 +37,11 @@ export class StoreownerformComponent {
     this.storeService.addStoreOwner(newUser).subscribe({
       next:(response)=>{
         alert(response.Message);
+        this.router.navigateByUrl('/storeownerdetails');
       },
       error:(error)=>{
-        alert(`Error: ${error}`);
+        alert(`StoreOwner already exists...!!`);
+        // alert(`Error: ${error.message}`);
       }
     });
   }

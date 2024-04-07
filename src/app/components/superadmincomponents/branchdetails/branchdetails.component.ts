@@ -38,9 +38,35 @@ export class BranchdetailsComponent implements OnInit{
     })
   }
 
-  editRow(): void{
+  editRow(id:number, branch:any): void{
+    this.adminservice.updateBranch(id, branch).subscribe({
+      next: (response) => {
+        console.log(response);
+        this.branches = response.Records;
+        console.log(this.branches);
+        this.message = response.Message;
+        console.log(this.message);
+      },
+      error: (error) => {
+        this.message = `Error: ${error}`;
+        alert("Error in updating details of branch. Please try again"+ this.message);
+      }
+    })
   }
-  deleteRow(): void{
+  deleteRow(id:number): void{
+    this.adminservice.deleteBranch(id).subscribe({
+      next: (response) => {
+        console.log(response);
+        this.branches = response.Records;
+        console.log(this.branches);
+        this.message = response.Message;
+        console.log(this.message);
+      },
+      error: (error) => {
+        this.message = `Error: ${error}`;
+        alert("Error in deleting branch. Please try again"+ this.message);
+      }
+    })
 
   }
 }
