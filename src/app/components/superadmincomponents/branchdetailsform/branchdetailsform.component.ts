@@ -33,6 +33,7 @@ export class BranchdetailsformComponent {
       next:(response)=>{
         this.branch = response.Record;
         alert(response.Message);
+        this.router.navigateByUrl('/branchdetails');
       },
       error:(error)=>{
         alert(`Error: ${error}`);

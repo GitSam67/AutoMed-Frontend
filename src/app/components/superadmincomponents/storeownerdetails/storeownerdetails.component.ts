@@ -1,8 +1,11 @@
+import { Branch } from './../../../Models/app.model';
 import { Component, OnInit } from '@angular/core';
 import { StoreOwner } from '../../../Models/app.user.model';
 import { AdminhttpService } from '../../../Services/adminhttp.service';
 import { RouterModule } from '@angular/router';
 import { SuperadminheaderComponent } from '../../reusablecomponents/superadminheader/superadminheader.component';
+import { KeyValue } from '@angular/common';
+import { response } from 'express';
 
 @Component({
   selector: 'app-storeownerdetails',
@@ -15,14 +18,16 @@ export class StoreownerdetailsComponent implements OnInit{
   storeowners: StoreOwner[];
   canDelete: boolean = false;
   message: string;
+  branchName: Map<number, string>;
 
   constructor(private adminservice: AdminhttpService){
     this.message = "";
     this.storeowners = new Array<StoreOwner>();
+    this.branchName = new Map<number, string>();
   }
 
   ngOnInit(): void {
-    console.log("get store owner");
+
     this.adminservice.getStoreOwner().subscribe({
       next: (response) => {
         this.storeowners = response.Records;
@@ -33,6 +38,19 @@ export class StoreownerdetailsComponent implements OnInit{
       error: (error) => {
         this.message = `Error: ${error}`;
         alert("Error in fetching details of store owners. Please try again"+ this.message);
+      }
+    })
+
+    this.adminservice.getBranches().subscribe({
+      next: (response) => {
+          console.log(response);
+          response.Records.forEach(record => {
+            this.branchName.set(record.BranchId, record.BranchName);
+          });
+      },
+      error: (error) => {
+        this.message = `Error: ${error}`;
+        alert("Error in fetching branch details. Please try again"+ this.message);
       }
     })
   }
@@ -61,6 +79,7 @@ export class StoreownerdetailsComponent implements OnInit{
         console.log(this.storeowners);
         this.message = response.Message;
         console.log(this.message);
+        window.location.reload();
       },
       error: (error) => {
         this.message = `Error: ${error}`;

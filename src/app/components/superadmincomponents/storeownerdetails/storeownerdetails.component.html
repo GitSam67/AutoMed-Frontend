@@ -24,13 +24,14 @@
                   <td style="border: 1px solid #ddd; padding: 8px;">{{ strowner.OwnerId }}</td>
                   <td style="border: 1px solid #ddd; padding: 8px;">{{ strowner.OwnerName }}</td>
                   <td style="border: 1px solid #ddd; padding: 8px;">{{ strowner.Email }}</td>
-                  <td style="border: 1px solid #ddd; padding: 8px;">{{ strowner.BranchId }}</td>
+                  <td style="border: 1px solid #ddd; padding: 8px;">{{ branchName.get(strowner.BranchId) }}</td>
+
+                  <td style="border: 1px solid #ddd; padding: 8px;">
+                    <button (click)="editRow(strowner.OwnerId, strowner)" class="px-10" style="padding: 10px; background-color: #06c93e; color: white; border: none; cursor: pointer; border-radius: 4px;">Edit</button>
+                  </td>
 
                   <td style="border: 1px solid #ddd; padding: 8px;">
                     <button (click)="deleteRow(strowner.OwnerId)" style="padding: 8px; background-color: #f44336; color: white; border: none; cursor: pointer; border-radius: 4px;">Delete</button>
-                  </td>
-                  <td style="border: 1px solid #ddd; padding: 8px;">
-                    <button (click)="editRow(strowner.OwnerId, strowner)" style="padding: 10px; background-color: #06c93e; color: white; border: none; cursor: pointer; border-radius: 4px;">Edit</button>
                   </td>
 
               </tr>
