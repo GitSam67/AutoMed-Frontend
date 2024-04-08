@@ -46,7 +46,7 @@ export class LoginComponent{
         else if(sessionStorage.getItem('role') == "StoreOwner")
           this.router.navigateByUrl('/storeowner');
         else if(sessionStorage.getItem('role') == "Customer")
-          this.router.navigateByUrl('/customer');
+          this.router.navigateByUrl('/customerform');
         else
           this.router.navigateByUrl('/');
       },

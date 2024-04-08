@@ -1,7 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HeaderComponent } from '../../reusablecomponents/header/header.component';
 import { Order } from '../../../Models/app.orders.model';
 import { Medicine } from '../../../Models/app.medicine.model';
+import { SecurityhttpService } from '../../../Services/securityhttp.service';
+import { StoreownerhttpService } from '../../../Services/storeownerhttp.service';
+import { CustomerhttpService } from '../../../Services/customerhttp.service';
 
 @Component({
   selector: 'app-orders',
@@ -10,18 +13,54 @@ import { Medicine } from '../../../Models/app.medicine.model';
   templateUrl: './orders.component.html',
   styleUrl: './orders.component.css'
 })
-export class OrdersComponent {
-  orders: Order[]
-  medicines: Medicine[]
-  constructor(){
+export class OrdersComponent implements OnInit{
+  orders: Order[] = [];
+  medicines: Medicine[];
+  token: any = "";
+  branchId: string = "";
+  customerId: number = 0;
+  constructor(private userService: SecurityhttpService, private strService: StoreownerhttpService, private customerService: CustomerhttpService){
     this.orders = new Array<any>();
     this.medicines = new Array<any>();
-    this.medicines.push(
-      { MedicineId: 1, Name: "Paracetamol", Manufacturer: "SKPL", UnitPrice: 20, BatchNumber: '2', ExpiryDate: new Date(), Category: "AntiHistamines"},
-    )
-    // this.orders.push(
-    //   { OrderId: 1, CustomerId: 1, Medicines: [this.medicines[0], this.medicines[1]], PurchaseTime: new Date(), TotalBill: 500, BranchId: 2}
-    // );
-
   }
+
+  viewInvoice(orderId: any): void{
+    this.customerService.viewMedicalBill(this.customerId, orderId).subscribe({
+      next:(response:any)=>{
+        console.log(response.message);
+      },
+      error(error) {
+        alert(`Error: ${error}`);
+      },
+    })
+  }
+
+  ngOnInit(): void {
+    this.token = sessionStorage.getItem('token');
+    this.userService.getUserInfo(this.token).subscribe({
+    next:(response:any)=>{
+      console.log(response);
+      this.branchId = response.BranchId;
+      this.customerId = response.CustomerId;
+
+      this.strService.getSalesReport(this.branchId).subscribe({
+        next:(response)=>{
+          console.log(response);
+          this.orders = response.Records;
+
+          this.orders = this.orders.filter(order => order.CustomerId === this.customerId);
+        },
+        error:(error)=>{
+          alert(`Error: ${error}`);
+        }
+      });
+    },
+    error:(error)=>{
+      console.log(`Error: ${error}`);
+    }
+  });
+  }
+
+  
+  
 }

@@ -43,13 +43,15 @@ export class RegisterComponent {
     this.securityService.register(newUser).subscribe({
       next:(response)=>{
         alert(response.Message);
+        sessionStorage.setItem('token',response.Token);
+        sessionStorage.setItem('role',response.Role);
         const nameToStore = this.name || "Default Name";
         const nameAsString = String(nameToStore);
         sessionStorage.setItem('name', nameAsString);
         const emailtoStore = this.email || "Default Email";
         const emailasString = String(emailtoStore);
         sessionStorage.setItem('email', emailasString);
-        this.router.navigate(['customerform'], {queryParams: { name: nameAsString , email: emailasString} });
+        this.router.navigate(['login'], {queryParams: { name: nameAsString , email: emailasString} });
       },
       error:(error)=>{
         alert(`Error: ${error}`);

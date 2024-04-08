@@ -46,20 +46,21 @@ export class CustomerhttpService {
     return response;
   }
 
-  generateMedicalBill(id:any, orders:any, claim:number, branchId:number):Observable<APIResponse<any>>{
-    const requestBody = {
-      id: id,
-      orders: orders,
-      claim: claim,
-      branchId: branchId
-    };
-    let response:Observable<APIResponse<any>>;
-    response=this.http.post<APIResponse<any>>(`${this.url}api/Customer/GenerateMedicalBill/${id}`, requestBody, {
-      headers:{
-        'Content-Type':'application/json'
-      }
-    });
-    return response;
+  // generateMedicalBill(id:any, orders:any, claim:number, branchId:number):Observable<APIResponse<any>>{
+  //   const requestBody = {
+  //     orders: orders
+  //   };
+  //   let response:Observable<APIResponse<any>>;
+  //   response=this.http.post<APIResponse<any>>(`${this.url}api/Customer/GenerateMedicalBill/${id}`, requestBody, claim, branchId, {
+  //     headers:{
+  //       'Content-Type':'application/json'
+  //     }
+  //   });
+  //   return response;
+  // }
+  generateMedicalBill(customerId: number, orders: any, claim: number, branchId: number): Observable<any> {
+    const url = `${this.url}/GenerateMedicalBill/${customerId}`;
+    return this.http.post<any>(url, { orders, claim, branchId });
   }
 
   viewMedicalBill(id:any, orderId:any):Observable<APIResponse<any>>{
