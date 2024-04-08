@@ -80,8 +80,8 @@ export class CustomerformComponent implements OnInit{
     console.log(this.email);
     const newCust: Customer = {
       CustomerId: 0,
-      CustomerName: this.name,
-      Email: this.email,
+      CustomerName: sessionStorage.getItem('name'),
+      Email: sessionStorage.getItem('email'),
       Age: this.customerForm.controls['age'].value,
       Gender: this.customerForm.controls['gender'].value,
       BloodGroup: this.customerForm.controls['bloodGroup'].value,

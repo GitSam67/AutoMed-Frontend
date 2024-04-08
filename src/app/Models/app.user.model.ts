@@ -2,14 +2,14 @@ export class Customer{
     [x:string]:any;
     constructor(
         public CustomerId: number,
-        public CustomerName: string,
+        public CustomerName: string | any,
         public Age: string,
         public Gender: string,
         public BloodGroup: string,
         public ContactNo: string,
         public Address: string,
         public Prescription: string,
-        public Email: string,
+        public Email: string | any,
     ){}
 }
 

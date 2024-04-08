@@ -21,7 +21,7 @@ export class MedicinedetailsformComponent {
   Category: string;
 
   constructor(private medservice: AdminhttpService, private router: Router) {
-    this.med = new Medicine(0, '', '', 0, '', new Date(), '');
+    this.med = new Medicine(0, '', 0, new Date(), '', '', '');
     this.Name = '',this.Manufacturer = '', this.UnitPrice = 0, this.BatchNumber = '', this.ExpiryDate = new Date(), this.Category = '';
   }
 
