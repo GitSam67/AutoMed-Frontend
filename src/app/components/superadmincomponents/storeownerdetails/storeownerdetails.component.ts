@@ -2,7 +2,7 @@ import { Branch } from './../../../Models/app.model';
 import { Component, OnInit } from '@angular/core';
 import { StoreOwner } from '../../../Models/app.user.model';
 import { AdminhttpService } from '../../../Services/adminhttp.service';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { SuperadminheaderComponent } from '../../reusablecomponents/superadminheader/superadminheader.component';
 import { KeyValue } from '@angular/common';
 import { response } from 'express';
@@ -20,7 +20,7 @@ export class StoreownerdetailsComponent implements OnInit{
   message: string;
   branchName: Map<number, string>;
 
-  constructor(private adminservice: AdminhttpService){
+  constructor(private adminservice: AdminhttpService, private router: Router){
     this.message = "";
     this.storeowners = new Array<StoreOwner>();
     this.branchName = new Map<number, string>();
@@ -55,21 +55,11 @@ export class StoreownerdetailsComponent implements OnInit{
     })
   }
 
-  editRow(id:number, owner:StoreOwner): void{
-    this.adminservice.editStoreOwner(id, owner).subscribe({
-      next: (response) => {
-        console.log(response);
-        this.storeowners = response.Records;
-        console.log(this.storeowners);
-        this.message = response.Message;
-        console.log(this.message);
-      },
-      error: (error) => {
-        this.message = `Error: ${error}`;
-        alert("Error in updating details of store owners. Please try again"+ this.message);
-      }
-    })
+  edit(id:any){
+    sessionStorage.setItem('ownerId', id);
+    this.router.navigateByUrl('storeownereditform');
   }
+
 
   deleteRow(id:number): void{
     alert(`Confirm delete for store owner with id: ${id} ?`);

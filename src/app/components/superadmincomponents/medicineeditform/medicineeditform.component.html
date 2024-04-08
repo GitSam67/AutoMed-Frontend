@@ -1,0 +1,38 @@
+<div class="flex justify-center items-center h-screen bg-gray-200">
+  <div class="p-8 bg-white rounded-lg shadow-lg">
+      <h2 class="text-2xl font-semibold mb-4">Edit Medicine</h2>
+      <form>
+          <div class="grid grid-cols-2 gap-4">
+              <!-- <div class="mb-4">
+                  <label class="block text-sm font-medium mb-2">Medicine Id</label>
+                  <input [(ngModel)]="MedicineId" type="text" class="w-full px-3 py-2 border rounded-md" placeholder="Enter Medicine Id" />
+              </div> -->
+              <div class="mb-4">
+                  <label class="block text-sm font-medium mb-2" for="medname">Name</label>
+                  <input [(ngModel)]="Name" type="text" id="medname" name="medname" class="w-full px-3 py-2 border rounded-md" placeholder="Enter Name" />
+              </div>
+              <div class="mb-4">
+                  <label class="block text-sm font-medium mb-2" for="mft">Manufacturer</label>
+                  <input [(ngModel)]="Manufacturer" type="text" id="mft" name="mft" class="w-full px-3 py-2 border rounded-md" placeholder="Enter Manufacturer" />
+              </div>
+              <div class="mb-4">
+                  <label class="block text-sm font-medium mb-2" for="price">Unit Price</label>
+                  <input [(ngModel)]="UnitPrice" type="number" id="price" name="price" class="w-full px-3 py-2 border rounded-md" placeholder="Enter Unit Price" />
+              </div>
+              <div class="mb-4">
+                  <label class="block text-sm font-medium mb-2" for="batch">Batch Number</label>
+                  <input [(ngModel)]="BatchNumber" type="text" id="batch" name="batch" class="w-full px-3 py-2 border rounded-md" placeholder="Enter Batch Number" />
+              </div>
+              <div class="mb-4">
+                  <label class="block text-sm font-medium mb-2" for="expiry">Expiry Date</label>
+                  <input [(ngModel)]="ExpiryDate" type="date" id="expiry" name="expiry" class="w-full px-3 py-2 border rounded-md" [min]="minDate"/>
+              </div>
+              <div class="mb-4">
+                  <label class="block text-sm font-medium mb-2" for="category">Category</label>
+                  <input [(ngModel)]="Category" type="text" id="category" name="category" class="w-full px-3 py-2 border rounded-md" placeholder="Enter Category" />
+              </div>
+          </div>
+          <button (click)="editMed()" type="submit" class="w-full bg-green-500 text-white font-bold py-2 px-4 rounded-md hover:bg-green-600">Edit Medicine</button>
+      </form>
+  </div>
+</div>

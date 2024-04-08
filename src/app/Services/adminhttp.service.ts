@@ -29,6 +29,17 @@ export class AdminhttpService {
     return response;
   }
 
+  getStoreOwnerDetail(id:any):Observable<APIResponse<any>>{
+    console.log("service called");
+      let response:Observable<APIResponse<any>>;
+      response=this.http.get<APIResponse<any>>(`${this.url}api/SuperAdmin/GetStoreOwners/${id}`,{
+        headers:{
+          'Content-Type':'application/json'
+        }
+      });
+      return response;
+    }
+
   addStoreOwner(owner:StoreOwner):Observable<APIResponse<any>>{
     let response:Observable<APIResponse<any>>;
     response=this.http.post<APIResponse<any>>(`${this.url}api/SuperAdmin/AddStoreOwner`, owner, {
@@ -102,6 +113,16 @@ export class AdminhttpService {
   getMedicines():Observable<APIResponse<any>>{
     let response:Observable<APIResponse<any>>;
     response=this.http.get<APIResponse<any>>(`${this.url}api/SuperAdmin/GetMedicine`,{
+      headers:{
+        'Content-Type':'application/json'
+      }
+    });
+    return response;
+  }
+
+  getMedicine(id:any):Observable<APIResponse<any>>{
+    let response:Observable<APIResponse<any>>;
+    response=this.http.get<APIResponse<any>>(`${this.url}api/SuperAdmin/GetMedicine/${id}`,{
       headers:{
         'Content-Type':'application/json'
       }

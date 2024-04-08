@@ -15,6 +15,8 @@ import { StoreownerComponent } from './components/storeownercomponents/storeowne
 import { InventoryComponent } from './components/storeownercomponents/inventory/inventory.component';
 import { ReportsComponent } from './components/superadmincomponents/reports/reports.component';
 import { BranchreportsComponent } from './components/storeownercomponents/branchreports/branchreports.component';
+import { StoreownereditformComponent } from './components/superadmincomponents/storeownereditform/storeownereditform.component';
+import { MedicineeditformComponent } from './components/superadmincomponents/medicineeditform/medicineeditform.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -23,10 +25,12 @@ export const routes: Routes = [
   { path: "superadmin", component: SuperadminComponent},
   { path: "storeownerdetails", component: StoreownerdetailsComponent},
   { path: "storeownerform", component: StoreownerformComponent},
+  {path: "storeownereditform", component: StoreownereditformComponent},
   { path: "branchdetails", component: BranchdetailsComponent},
   { path: "branchdetailsform", component: BranchdetailsformComponent},
   { path: "medicinedetails", component: MedicinedetailsComponent},
   { path: "medicinedetailsform", component: MedicinedetailsformComponent},
+  {path: "medicineeditform", component: MedicineeditformComponent},
   { path: "branchreports", component: BranchreportsComponent},
   { path: "storeowner", component: StoreownerComponent},
   { path: "inventory", component: InventoryComponent},

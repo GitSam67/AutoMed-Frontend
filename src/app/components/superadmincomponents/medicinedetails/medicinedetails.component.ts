@@ -2,7 +2,7 @@ import { AdminhttpService } from './../../../Services/adminhttp.service';
 import { Component } from '@angular/core';
 import { Medicine } from '../../../Models/app.medicine.model';
 import { SuperadminheaderComponent } from '../../reusablecomponents/superadminheader/superadminheader.component';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-medicinedetails',
@@ -15,7 +15,7 @@ export class MedicinedetailsComponent {
   medicines: Medicine[];
   message: string;
 
-  constructor(private adminservice: AdminhttpService ){
+  constructor(private adminservice: AdminhttpService, private router:Router){
     this.medicines = new Array<any>();
     this.message = "";
   }
@@ -35,18 +35,9 @@ export class MedicinedetailsComponent {
   }
 
 
-  editRow(id:any, med:Medicine): void{
-    this.adminservice.updateMedicine(id, med).subscribe({
-      next: (response) => {
-        this.medicines = response.Records;
-        this.message = response.Message;
-        console.log(this.message);
-      },
-      error: (error) => {
-        this.message = `Error: ${error}`;
-        alert("Error in updating Medicine. Please try again"+ this.message);
-      }
-    })
+  editRow(id:any): void{
+    sessionStorage.setItem('medId', id);
+    this.router.navigateByUrl('medicineeditform');
   }
 
   deleteRow(id:any): void{

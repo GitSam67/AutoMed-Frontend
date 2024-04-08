@@ -24,7 +24,7 @@
                   <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{ branch.Address }}</td>
 
                     <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">
-                        <button (click)="editRow(branch.BranchId, branch)" style="padding: 10px; width: 60px; background-color: #04c825; color: white; border: none; cursor: pointer; border-radius: 4px;">Edit</button>
+                        <button [disabled]="true" (click)="editRow(branch.BranchId, branch)" style="padding: 10px; width: 60px; background-color: #04c825; color: white; border: none; cursor: pointer; border-radius: 4px;">Edit</button>
                     </td>
                     <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">
                         <button (click)="deleteRow(branch.BranchId)" style="padding: 8px; background-color: #f44336; color: white; border: none; cursor: pointer; border-radius: 4px;">Delete</button>
