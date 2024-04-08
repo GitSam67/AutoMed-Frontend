@@ -54,6 +54,7 @@ export class BranchdetailsComponent implements OnInit{
     })
   }
   deleteRow(id:number): void{
+    alert(`Confirm delete for branch with id: ${id} ?`);
     this.adminservice.deleteBranch(id).subscribe({
       next: (response) => {
         console.log(response);
@@ -61,6 +62,7 @@ export class BranchdetailsComponent implements OnInit{
         console.log(this.branches);
         this.message = response.Message;
         console.log(this.message);
+        window.location.reload();
       },
       error: (error) => {
         this.message = `Error: ${error}`;

@@ -21,16 +21,16 @@
           @for (strowner of storeowners; track $index)
           {
               <tr>
-                  <td style="border: 1px solid #ddd; padding: 8px;">{{ strowner.OwnerId }}</td>
-                  <td style="border: 1px solid #ddd; padding: 8px;">{{ strowner.OwnerName }}</td>
-                  <td style="border: 1px solid #ddd; padding: 8px;">{{ strowner.Email }}</td>
-                  <td style="border: 1px solid #ddd; padding: 8px;">{{ branchName.get(strowner.BranchId) }}</td>
+                  <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{ strowner.OwnerId }}</td>
+                  <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{ strowner.OwnerName }}</td>
+                  <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{ strowner.Email }}</td>
+                  <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{ branchName.get(strowner.BranchId) }}</td>
 
-                  <td style="border: 1px solid #ddd; padding: 8px;">
-                    <button (click)="editRow(strowner.OwnerId, strowner)" class="px-10" style="padding: 10px; background-color: #06c93e; color: white; border: none; cursor: pointer; border-radius: 4px;">Edit</button>
+                  <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">
+                    <button (click)="editRow(strowner.OwnerId, strowner)" class="px-10 w-16" style="padding: 10px; background-color: #06c93e; color: white; border: none; cursor: pointer; border-radius: 4px;">Edit</button>
                   </td>
 
-                  <td style="border: 1px solid #ddd; padding: 8px;">
+                  <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">
                     <button (click)="deleteRow(strowner.OwnerId)" style="padding: 8px; background-color: #f44336; color: white; border: none; cursor: pointer; border-radius: 4px;">Delete</button>
                   </td>
 

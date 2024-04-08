@@ -50,11 +50,13 @@ export class MedicinedetailsComponent {
   }
 
   deleteRow(id:any): void{
+    alert(`Confirm delete for medicine with id: ${id} ?`);
     this.adminservice.deleteMedicine(id).subscribe({
       next: (response) => {
         this.medicines = response.Records;
         this.message = response.Message;
         console.log(this.message);
+        window.location.reload();
       },
       error: (error) => {
         this.message = `Error: ${error}`;

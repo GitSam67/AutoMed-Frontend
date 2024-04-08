@@ -13,16 +13,16 @@ import { Router } from '@angular/router';
 })
 export class BranchdetailsformComponent {
   branch: Branch;
-  BranchName:string;
-  Address:string;
+  BranchName:string = '';
+  Address:string = '';
 
   constructor(private branchservice: AdminhttpService, private router: Router) {
     this.branch = new Branch(0, '', '');
-    this.BranchName = '', this.Address = '';
   }
 
   addBranch(): void {
-
+    console.log(this.BranchName);
+    console.log(this.Address);
     const newBr: Branch = {
       BranchId: 0,
       BranchName: this.BranchName,

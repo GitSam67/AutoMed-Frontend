@@ -16,11 +16,13 @@ export class ReportsComponent implements OnInit {
   orders: Order[] = [];
   salesAmount: number = 0;
   message: string;
+  branchName: Map<number, string>;
 
   constructor(private adminservice:AdminhttpService) {
         this.orders = new Array<Order>();
         this.salesAmount = 0;
         this.message = "";
+        this.branchName = new Map<number, string>();
   }
 
   ngOnInit(): void {
@@ -34,6 +36,19 @@ export class ReportsComponent implements OnInit {
       error: (error) => {
         this.message = `Error: ${error}`;
         alert("Error in fetching details of sales. Please try again"+ this.message);
+      }
+    })
+
+    this.adminservice.getBranches().subscribe({
+      next: (response) => {
+          console.log(response);
+          response.Records.forEach(record => {
+            this.branchName.set(record.BranchId, record.BranchName);
+          });
+      },
+      error: (error) => {
+        this.message = `Error: ${error}`;
+        alert("Error in fetching branch details. Please try again"+ this.message);
       }
     })
   }

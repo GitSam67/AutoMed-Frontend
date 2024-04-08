@@ -23,7 +23,7 @@
           @for (medicine of medicines; track $index)
           {
               <tr>
-                  <td style="border: 1px solid #ddd; padding: 8px;">{{ medicine.MedicineId }}</td>
+                  <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{ medicine.MedicineId }}</td>
                   <td style="border: 1px solid #ddd; padding: 8px;">{{ medicine.Name }}</td>
                   <td style="border: 1px solid #ddd; padding: 8px;">{{ medicine.Manufacturer }}</td>
                   <td style="border: 1px solid #ddd; padding: 8px;">{{ medicine.UnitPrice }}</td>
@@ -31,11 +31,11 @@
                   <td style="border: 1px solid #ddd; padding: 8px;">{{ medicine.ExpiryDate }}</td>
                   <td style="border: 1px solid #ddd; padding: 8px;">{{ medicine.Category }}</td>
 
-                    <td style="border: 1px solid #ddd; padding: 8px;">
-                        <button (click)="deleteRow(medicine.MedicineId)" style="padding: 8px; background-color: #f44336; color: white; border: none; cursor: pointer; border-radius: 4px;">Delete</button>
+                    <td style="border: 1px solid #ddd; padding: 8px; text-align: center ;">
+                        <button (click)="editRow(medicine.MedicineId, medicine)" class="px-10" style="padding: 10px; background-color: #1bd207; color: white; border: none; cursor: pointer; border-radius: 4px;">Edit</button>
                     </td>
-                    <td style="border: 1px solid #ddd; padding: 8px;">
-                        <button (click)="editRow(medicine.MedicineId, medicine)" style="padding: 10px; background-color: #1bd207; color: white; border: none; cursor: pointer; border-radius: 4px;">Edit</button>
+                    <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">
+                        <button (click)="deleteRow(medicine.MedicineId)" style="padding: 8px; background-color: #f44336; color: white; border: none; cursor: pointer; border-radius: 4px;">Delete</button>
                     </td>
 
               </tr>

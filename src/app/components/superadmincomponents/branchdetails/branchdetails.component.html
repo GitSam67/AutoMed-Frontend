@@ -19,9 +19,9 @@
           @for (branch of branches; track $index)
           {
               <tr>
-                  <td style="border: 1px solid #ddd; padding: 8px;">{{ branch.BranchId }}</td>
-                  <td style="border: 1px solid #ddd; padding: 8px;">{{ branch.BranchName }}</td>
-                  <td style="border: 1px solid #ddd; padding: 8px;">{{ branch.Address }}</td>
+                  <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{ branch.BranchId }}</td>
+                  <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{ branch.BranchName }}</td>
+                  <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{ branch.Address }}</td>
 
                     <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">
                         <button (click)="editRow(branch.BranchId, branch)" style="padding: 10px; width: 60px; background-color: #04c825; color: white; border: none; cursor: pointer; border-radius: 4px;">Edit</button>

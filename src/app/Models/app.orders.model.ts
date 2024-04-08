@@ -6,6 +6,7 @@ export class Order{
         public OrderId: number,
         public CustomerId: number,
         public Medicines: Medicine[],
+        public orders: Array<string>,
         public PurchaseTime: Date,
         public TotalBill: number,
         public BranchId: number
