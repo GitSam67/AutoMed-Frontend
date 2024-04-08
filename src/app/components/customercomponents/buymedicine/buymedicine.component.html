@@ -3,16 +3,17 @@
   <h3>No Data To Show</h3>
 }
 @else {
+  <button (click)="buyMedicine()" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mx-10 mt-6">Buy Now</button>
   <div class="flex m-10">
   <table style="width: 100%; border-collapse: collapse;">
       <thead>
           <tr>
               <th style="border: 1px solid #ddd; padding: 8px;">Medicine Id</th>
-              <th style="border: 1px solid #ddd; padding: 8px;">Medicin Name</th>
-              <th style="border: 1px solid #ddd; padding: 8px;">Unit Price</th>
-              <th style="border: 1px solid #ddd; padding: 8px;">Expiry Date</th>
-              <th style="border: 1px solid #ddd; padding: 8px;">Batch number</th>
+              <th style="border: 1px solid #ddd; padding: 8px;">Medicine Name</th>
               <th style="border: 1px solid #ddd; padding: 8px;">Manufacturer</th>
+              <th style="border: 1px solid #ddd; padding: 8px;">Unit Price</th>
+              <th style="border: 1px solid #ddd; padding: 8px;">Batch number</th>
+              <th style="border: 1px solid #ddd; padding: 8px;">Expiry Date</th>
               <th style="border: 1px solid #ddd; padding: 8px;">Category</th>
           </tr>
       </thead>
@@ -25,13 +26,14 @@
                   <td style="border: 1px solid #ddd; padding: 8px;">{{ medicine.Manufacturer }}</td>
                   <td style="border: 1px solid #ddd; padding: 8px;">{{ medicine.UnitPrice }}</td>
                   <td style="border: 1px solid #ddd; padding: 8px;">{{ medicine.BatchNumber }}</td>
-                  <td style="border: 1px solid #ddd; padding: 8px;">{{ medicine.ExpiryDate }}</td>
+                  <td style="border: 1px solid #ddd; padding: 8px;">{{ medicine.ExpiryDate | date: "dd-MM-YY" }}</td>
                   <td style="border: 1px solid #ddd; padding: 8px;">{{ medicine.Category }}</td>
-
+                  <td style="border: 1px solid #ddd; padding: 8px;">
+                    <input type="number" [(ngModel)]="quantity" class="w-full px-3 py-2 border rounded-md" />
+                  </td>
                     <td style="border: 1px solid #ddd; padding: 8px;">
-                        <button style="padding: 8px; background-color: #f44336; color: white; border: none; cursor: pointer; border-radius: 4px;">Buy Now</button>
+                        <button (click)="addToCart(medicine.Name, quantity)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-10 mt-6">Add to Cart</button>
                     </td>
-
               </tr>
           }
       </tbody>

@@ -3,10 +3,10 @@ export class Medicine{
     constructor(
         public MedicineId: number,
         public Name: string,
-        public Manufacturer: string,
         public UnitPrice: number,
-        public BatchNumber: string,
         public ExpiryDate: Date,
+        public BatchNumber: string,
+        public Manufacturer: string,
         public Category: string
     ){};
 }
