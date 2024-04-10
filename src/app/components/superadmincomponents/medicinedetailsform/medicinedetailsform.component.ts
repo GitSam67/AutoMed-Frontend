@@ -13,18 +13,18 @@ import { Router } from '@angular/router';
 })
 export class MedicinedetailsformComponent implements OnInit {
   med: Medicine;
-  Name: string;
-  Manufacturer: string;
+  Name: any;
+  Manufacturer: any;
   UnitPrice: number;
-  BatchNumber: string;
+  BatchNumber: any;
   ExpiryDate: Date;
-  Category: string;
-  minDate: string;
+  Category: any;
+  minDate: any;
   token:any;
 
   constructor(private medservice: AdminhttpService, private router: Router) {
     this.med = new Medicine(0, '', 0, new Date(), '', '', '');
-    this.Name = '',this.Manufacturer = '', this.UnitPrice = 0, this.BatchNumber = '', this.ExpiryDate = new Date(), this.Category = '';
+    this.UnitPrice = 0; this.ExpiryDate = new Date();
 
     const today = new Date();
 
@@ -41,6 +41,12 @@ export class MedicinedetailsformComponent implements OnInit {
   }
 
   addMed(): void {
+
+    if(this.Name == '' , this.Manufacturer == '', this.UnitPrice == 0, this.BatchNumber == '', this.ExpiryDate == new Date(0), this.Category == '')
+    {
+      alert("Fields must be not null..!!");
+      return;
+    }
 
     const newMed: Medicine = {
       MedicineId: 0,

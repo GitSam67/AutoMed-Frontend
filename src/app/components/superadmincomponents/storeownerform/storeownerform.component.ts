@@ -16,8 +16,8 @@ import { response } from 'express';
 })
 export class StoreownerformComponent implements OnInit {
   user: StoreOwner;
-  name: string = '';
-  email: string = '';
+  name: any;
+  email: any;
   role: string = 'StoreOwner';
   Branch: any = 0;
   token:any;
@@ -34,6 +34,11 @@ export class StoreownerformComponent implements OnInit {
   }
 
   addStoreOwner(): void {
+
+    if(this.name == null && this.email == null && this.Branch == 0) {
+      alert("Fields must be not null..!!");
+      return;
+    }
 
     const newUser: StoreOwner = {
       OwnerId: 0,

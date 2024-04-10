@@ -13,8 +13,8 @@ import { FormsModule } from '@angular/forms';
 })
 export class StoreownereditformComponent implements OnInit{
   user: StoreOwner;
-  name: string = '';
-  email: string = '';
+  name: any;
+  email: any;
   Branch: any = 0;
   ownerId: any = 0;
   message: string = '';
@@ -47,6 +47,19 @@ export class StoreownereditformComponent implements OnInit{
   }
 
   editStoreOwner(): void {
+
+    if(this.name == null && this.email == null && this.Branch == 0) {
+      alert("Fields must be not null..!!");
+      return;
+    }
+
+    if (this.email) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(this.email)) {
+        alert('Invalid email format');
+        return;
+      }
+    }
 
     const owner: StoreOwner = {
       OwnerId: 0,

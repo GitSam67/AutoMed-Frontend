@@ -13,8 +13,8 @@ import { Router } from '@angular/router';
 })
 export class BranchdetailsformComponent implements OnInit {
   branch: Branch;
-  BranchName:string = '';
-  Address:string = '';
+  BranchName:any;
+  Address:any;
   token:any;
 
   constructor(private branchservice: AdminhttpService, private router: Router) {
@@ -29,8 +29,12 @@ export class BranchdetailsformComponent implements OnInit {
   }
 
   addBranch(): void {
-    console.log(this.BranchName);
-    console.log(this.Address);
+
+    if(this.BranchName == null && this.Address == null) {
+      alert("Fields must be not null..!!");
+      return;
+    }
+
     const newBr: Branch = {
       BranchId: 0,
       BranchName: this.BranchName,
