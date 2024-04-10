@@ -17,6 +17,7 @@ import { ReportsComponent } from './components/superadmincomponents/reports/repo
 import { BranchreportsComponent } from './components/storeownercomponents/branchreports/branchreports.component';
 import { StoreownereditformComponent } from './components/superadmincomponents/storeownereditform/storeownereditform.component';
 import { MedicineeditformComponent } from './components/superadmincomponents/medicineeditform/medicineeditform.component';
+import { CartComponent } from './components/customercomponents/cart/cart.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -37,6 +38,7 @@ export const routes: Routes = [
   { path: "reports", component: ReportsComponent},
   { path: 'customerform', component: CustomerformComponent},
   { path: 'orders', component: OrdersComponent},
+  {path: 'cart', component: CartComponent},
   { path: '', redirectTo: '/register', pathMatch: 'full' },
   { path: '**', redirectTo: '/login' }
 ];

@@ -18,14 +18,19 @@ export class StoreownereditformComponent implements OnInit{
   Branch: any = 0;
   ownerId: any = 0;
   message: string = '';
+  token:any;
 
   constructor(private storeService: AdminhttpService, private router: Router) {
     this.user = new StoreOwner(0, '', '', 0);
   }
 
   ngOnInit(): void {
+    this.token = sessionStorage.getItem('token');
+    if(this.token == null) {
+      this.router.navigateByUrl('/login');
+    }
     this.ownerId = sessionStorage.getItem('ownerId');
-    this.storeService.getStoreOwnerDetail(this.ownerId).subscribe({
+    this.storeService.getStoreOwnerDetail(this.ownerId, this.token).subscribe({
       next: (response) => {
         console.log(response);
         this.name = response.Record.OwnerName;
@@ -51,7 +56,7 @@ export class StoreownereditformComponent implements OnInit{
     };
 
 
-    this.storeService.editStoreOwner(this.ownerId, owner).subscribe({
+    this.storeService.editStoreOwner(this.ownerId, owner, this.token).subscribe({
       next: (response) => {
         console.log(response);
         this.message = response.Message;
@@ -66,3 +71,4 @@ export class StoreownereditformComponent implements OnInit{
     })
   }
 }
+

@@ -7,6 +7,7 @@ import { StoreownerhttpService } from '../../../Services/storeownerhttp.service'
 import { SecurityhttpService } from '../../../Services/securityhttp.service';
 import { AdminhttpService } from '../../../Services/adminhttp.service';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-inventory',
@@ -20,7 +21,7 @@ export class InventoryComponent implements OnInit{
   branchName: Map<number, string>;
   medName: Map<number, string>;
   isExpired: Boolean = false;
-  token: any = '';
+  token: any;
   branchId: number = 0;
   message: string = '';
   placeorder: boolean = false;
@@ -30,7 +31,7 @@ export class InventoryComponent implements OnInit{
   qty: number = 0;
   alertRecords: any[] = [];
 
-  constructor(private strService: StoreownerhttpService, private userService:SecurityhttpService, private adminservice:AdminhttpService){
+  constructor(private strService: StoreownerhttpService, private userService:SecurityhttpService, private adminservice:AdminhttpService, private router:Router){
     this.inventory = new Array<any>();
     this.branchName = new Map<number, string>();
     this.medName = new Map<number, string>();
@@ -38,14 +39,16 @@ export class InventoryComponent implements OnInit{
   }
 
   ngOnInit(): void {
-
     this.token = sessionStorage.getItem('token');
+    if(this.token == null) {
+      this.router.navigateByUrl('/login');
+    }
     this.userService.getUserInfo(this.token).subscribe({
     next:(response:any)=>{
       console.log(response);
       this.branchId = response.BranchId;
 
-      this.strService.getInventory(this.branchId).subscribe({
+      this.strService.getInventory(this.branchId, this.token).subscribe({
         next:(response:any)=>{
           console.log(response);
           this.inventory = response.Records;
@@ -56,7 +59,7 @@ export class InventoryComponent implements OnInit{
         }
       });
 
-      this.strService.checkForExpiry(this.branchId).subscribe({
+      this.strService.checkForExpiry(this.branchId, this.token).subscribe({
         next:(response)=>{
           console.log(response);
           response.Records.forEach(item => {
@@ -72,7 +75,7 @@ export class InventoryComponent implements OnInit{
         }
       });
 
-      this.strService.checkForStockLevel(this.branchId).subscribe({
+      this.strService.checkForStockLevel(this.branchId,this.token).subscribe({
         next:(response)=>{
           console.log(response);
           response.Records.forEach(item => {
@@ -94,7 +97,7 @@ export class InventoryComponent implements OnInit{
   });
 
 
-  this.adminservice.getBranches().subscribe({
+  this.adminservice.getBranches(this.token).subscribe({
     next: (response) => {
         console.log(response);
         response.Records.forEach(record => {
@@ -107,7 +110,7 @@ export class InventoryComponent implements OnInit{
     }
   })
 
-  this.adminservice.getMedicines().subscribe({
+  this.adminservice.getMedicines(this.token).subscribe({
     next: (response) => {
         console.log(response);
         response.Records.forEach(record => {
@@ -132,7 +135,7 @@ export class InventoryComponent implements OnInit{
     console.log(order);
     const orderObject = Object.fromEntries(order.entries());
     console.log(orderObject);
-    this.strService.placeOrder(orderObject, id).subscribe({
+    this.strService.placeOrder(orderObject, id, this.token).subscribe({
       next:(response)=>{
         alert(response.Message);
         window.location.reload();
@@ -153,7 +156,7 @@ export class InventoryComponent implements OnInit{
     console.log(name);
     this.stock.push(name);
     console.log(this.stock);
-    this.strService.removeStock(this.branchId, this.stock).subscribe({
+    this.strService.removeStock(this.branchId, this.stock, this.token).subscribe({
       next:(response)=>{
         console.log(response.Message);
         window.location.reload();

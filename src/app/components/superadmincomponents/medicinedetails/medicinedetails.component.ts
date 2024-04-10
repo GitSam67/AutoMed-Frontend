@@ -14,6 +14,7 @@ import { Router, RouterModule } from '@angular/router';
 export class MedicinedetailsComponent {
   medicines: Medicine[];
   message: string;
+  token:any;
 
   constructor(private adminservice: AdminhttpService, private router:Router){
     this.medicines = new Array<any>();
@@ -21,7 +22,11 @@ export class MedicinedetailsComponent {
   }
 
   ngOnInit(): void {
-    this.adminservice.getMedicines().subscribe({
+    this.token = sessionStorage.getItem('token');
+    if(this.token == null) {
+      this.router.navigateByUrl('/login');
+    }
+    this.adminservice.getMedicines(this.token).subscribe({
       next: (response) => {
         this.medicines = response.Records;
         this.message = response.Message;
@@ -42,7 +47,7 @@ export class MedicinedetailsComponent {
 
   deleteRow(id:any): void{
     alert(`Confirm delete for medicine with id: ${id} ?`);
-    this.adminservice.deleteMedicine(id).subscribe({
+    this.adminservice.deleteMedicine(id, this.token).subscribe({
       next: (response) => {
         this.medicines = response.Records;
         this.message = response.Message;

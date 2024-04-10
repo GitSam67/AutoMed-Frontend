@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { APIResponse } from '../Models/app.apiresponse.model';
@@ -26,50 +26,47 @@ export class CustomerhttpService {
     return response;
   }
 
-  getBranches():Observable<APIResponse<any>>{
+  getBranches(token:any):Observable<APIResponse<any>>{
     let response:Observable<APIResponse<any>>;
-    response=this.http.get<APIResponse<any>>(`${this.url}api/SuperAdmin/GetBranches`,{
-      headers:{
-        'Content-Type':'application/json'
-      }
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
     });
+    response=this.http.get<APIResponse<any>>(`${this.url}api/SuperAdmin/GetBranches`,
+    {headers: headers});
     return response;
   }
 
-  checkAvailability(id:any):Observable<APIResponse<any>>{
+  checkAvailability(id:any, token:any):Observable<APIResponse<any>>{
     let response:Observable<APIResponse<any>>;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
     response=this.http.post<APIResponse<any>>(`${this.url}api/Customer/CheckAvailableMedicines/${id}`, {
-      headers:{
-        'Content-Type':'application/json'
-      }
-    });
+    }, {headers: headers});
     return response;
   }
 
-  // generateMedicalBill(id:any, orders:any, claim:number, branchId:number):Observable<APIResponse<any>>{
-  //   const requestBody = {
-  //     orders: orders
-  //   };
-  //   let response:Observable<APIResponse<any>>;
-  //   response=this.http.post<APIResponse<any>>(`${this.url}api/Customer/GenerateMedicalBill/${id}`, requestBody, claim, branchId, {
-  //     headers:{
-  //       'Content-Type':'application/json'
-  //     }
-  //   });
-  //   return response;
-  // }
-  generateMedicalBill(customerId: number, orders: any, claim: number, branchId: number): Observable<any> {
-    const url = `${this.url}/GenerateMedicalBill/${customerId}`;
-    return this.http.post<any>(url, { orders, claim, branchId });
+  generateMedicalBill(id:any, orders:any, claim:any, branchId:any, token:any):Observable<APIResponse<any>>{
+    let response:Observable<APIResponse<any>>;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+    response=this.http.post<APIResponse<any>>(`${this.url}api/Customer/GenerateMedicalBill/${id}/${branchId}/${claim}`, orders,
+    {headers: headers});
+    return response;
   }
 
-  viewMedicalBill(id:any, orderId:any):Observable<APIResponse<any>>{
+  viewMedicalBill(id:any, orderId:any, token:any):Observable<APIResponse<any>>{
     let response:Observable<APIResponse<any>>;
-    response=this.http.post<APIResponse<any>>(`${this.url}api/Customer/ViewMedicalBill/${id}`, orderId, {
-      headers:{
-        'Content-Type':'application/json'
-      }
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
     });
+    response=this.http.get<APIResponse<any>>(`${this.url}api/Customer/ViewMedicalBill/${id}/${orderId}`, {
+     headers: headers});
     return response;
   }
 

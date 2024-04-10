@@ -3,8 +3,35 @@
   <h3>No Data To Show</h3>
 }
 @else {
-  <button (click)="buyMedicine()" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mx-10 mt-6">Buy Now</button>
-  <div class="flex m-10">
+@if (!branchSelect) {
+  <div class="absolute top-24 left-10 mb-4 w-1/8 flex items-center justify-start">
+    <label class="block text-md font-medium mb-2 mr-2" for="branchId">Select your closest branch</label>
+      <select [(ngModel)]="branchId" (ngModelChange)="onBranchIdChange()" id="branchId" name="branchId" class="w-full px-3 py-2 border rounded-md border-2">
+        <option *ngFor="let branch of branches" [value]="branch.BranchId">{{ branch.BranchName }}</option>
+      </select>
+  </div>
+}
+@else {
+  <div class="absolute top-24 left-10 mb-4 w-1/8 flex items-center justify-start">
+    <label class="text-lg font-medium mb-2 mr-2 mt-3" for="branchName">Selected branch: </label>
+      <h1 class="text-black text-xl font-bold" id="branchName">{{branchMapper.get(this.branchIdVar)}}</h1>
+  </div>
+}
+  <div class="flex items-center justify-end w-full">
+    <button (click)="goToCart()" class="bg-yellow-300 hover:bg-yellow-400 text-xl font-bold py-3 px-4 rounded mx-10 my-5">Go to Cart</button>
+  </div>
+
+  <div class="flex-col m-10">
+
+    <div *ngIf="selectMed" class="mb-8 w-1/2 mx-auto border flex items-center px-10 py-3 border rounded-lg">
+      <div class="mr-20 text-lg font-semibold">{{name}}</div>
+      <div class="flex items-center">
+        <label for="qty" class="mr-3 font-semibold">Qty:</label>
+        <input [(ngModel)]="qty" type="number" id="qty" name="qty" [min]="0" [max]="qtyMapper.get(medMapper.get(name))" class="w-full px-3 py-2 border rounded-md" placeholder="Enter Quantity" />
+      </div>
+      <div (click)="addToCart(name, qty)" class="bg-yellow-300 text-lg w-40 p-2 px-5 border rounded-lg font-bold text-md ml-20 cursor-pointer hover:bg-yellow-400">Add to Cart</div>
+    </div>
+
   <table style="width: 100%; border-collapse: collapse;">
       <thead>
           <tr>
@@ -15,26 +42,31 @@
               <th style="border: 1px solid #ddd; padding: 8px;">Batch number</th>
               <th style="border: 1px solid #ddd; padding: 8px;">Expiry Date</th>
               <th style="border: 1px solid #ddd; padding: 8px;">Category</th>
+              <th style="border: 1px solid #ddd; padding: 8px;">Quantity</th>
           </tr>
       </thead>
       <tbody>
           @for (medicine of medicines; track $index)
           {
+            @if (qtyMapper.get(medicine.MedicineId) == 0) {
+
+            }
+            @else {
               <tr>
-                  <td style="border: 1px solid #ddd; padding: 8px;">{{ medicine.MedicineId }}</td>
-                  <td style="border: 1px solid #ddd; padding: 8px;">{{ medicine.Name }}</td>
-                  <td style="border: 1px solid #ddd; padding: 8px;">{{ medicine.Manufacturer }}</td>
-                  <td style="border: 1px solid #ddd; padding: 8px;">{{ medicine.UnitPrice }}</td>
-                  <td style="border: 1px solid #ddd; padding: 8px;">{{ medicine.BatchNumber }}</td>
-                  <td style="border: 1px solid #ddd; padding: 8px;">{{ medicine.ExpiryDate | date: "dd-MM-YY" }}</td>
-                  <td style="border: 1px solid #ddd; padding: 8px;">{{ medicine.Category }}</td>
-                  <td style="border: 1px solid #ddd; padding: 8px;">
-                    <input type="number" [(ngModel)]="quantity" class="w-full px-3 py-2 border rounded-md" />
-                  </td>
-                    <td style="border: 1px solid #ddd; padding: 8px;">
-                        <button (click)="addToCart(medicine.Name, quantity)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-10 mt-6">Add to Cart</button>
+                  <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{ medicine.MedicineId }}</td>
+                  <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{ medicine.Name }}</td>
+                  <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{ medicine.Manufacturer }}</td>
+                  <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{ medicine.UnitPrice }}</td>
+                  <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{ medicine.BatchNumber }}</td>
+                  <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{ medicine.ExpiryDate | date: "dd-MM-YYYY" }}</td>
+                  <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{ medicine.Category }}</td>
+                  <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{ qtyMapper.get(medicine.MedicineId) }}</td>
+
+                    <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">
+                        <button (click)="selectMedicine(medicine.Name)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-10 my-2">Select</button>
                     </td>
               </tr>
+            }
           }
       </tbody>
   </table>

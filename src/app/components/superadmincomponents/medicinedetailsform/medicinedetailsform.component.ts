@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Medicine } from '../../../Models/app.medicine.model';
 import { AdminhttpService } from '../../../Services/adminhttp.service';
 import { FormsModule } from '@angular/forms';
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   templateUrl: './medicinedetailsform.component.html',
   styleUrl: './medicinedetailsform.component.css'
 })
-export class MedicinedetailsformComponent {
+export class MedicinedetailsformComponent implements OnInit {
   med: Medicine;
   Name: string;
   Manufacturer: string;
@@ -20,6 +20,7 @@ export class MedicinedetailsformComponent {
   ExpiryDate: Date;
   Category: string;
   minDate: string;
+  token:any;
 
   constructor(private medservice: AdminhttpService, private router: Router) {
     this.med = new Medicine(0, '', 0, new Date(), '', '', '');
@@ -30,6 +31,13 @@ export class MedicinedetailsformComponent {
     const formattedDate = this.formatDate(today);
 
     this.minDate = formattedDate;
+  }
+
+  ngOnInit(): void {
+    this.token = sessionStorage.getItem('token');
+    if(this.token == null) {
+      this.router.navigateByUrl('/login');
+    }
   }
 
   addMed(): void {
@@ -44,7 +52,7 @@ export class MedicinedetailsformComponent {
       Category: this.Category
     };
 
-    this.medservice.addMedicine(newMed).subscribe({
+    this.medservice.addMedicine(newMed, this.token).subscribe({
       next:(response)=>{
         this.med = response.Record;
         alert(response.Message);

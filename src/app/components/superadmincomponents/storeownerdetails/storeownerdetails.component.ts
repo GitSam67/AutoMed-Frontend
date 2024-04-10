@@ -19,6 +19,7 @@ export class StoreownerdetailsComponent implements OnInit{
   canDelete: boolean = false;
   message: string;
   branchName: Map<number, string>;
+  token:any;
 
   constructor(private adminservice: AdminhttpService, private router: Router){
     this.message = "";
@@ -28,7 +29,12 @@ export class StoreownerdetailsComponent implements OnInit{
 
   ngOnInit(): void {
 
-    this.adminservice.getStoreOwner().subscribe({
+    this.token = sessionStorage.getItem('token');
+    if(this.token == null) {
+      this.router.navigateByUrl('/login');
+    }
+
+    this.adminservice.getStoreOwner(this.token).subscribe({
       next: (response) => {
         this.storeowners = response.Records;
         console.log(this.storeowners);
@@ -41,7 +47,7 @@ export class StoreownerdetailsComponent implements OnInit{
       }
     })
 
-    this.adminservice.getBranches().subscribe({
+    this.adminservice.getBranches(this.token).subscribe({
       next: (response) => {
           console.log(response);
           response.Records.forEach(record => {
@@ -63,7 +69,7 @@ export class StoreownerdetailsComponent implements OnInit{
 
   deleteRow(id:number): void{
     alert(`Confirm delete for store owner with id: ${id} ?`);
-    this.adminservice.deleteStoreOwner(id).subscribe({
+    this.adminservice.deleteStoreOwner(id, this.token).subscribe({
       next: (response) => {
         console.log(response);
         this.storeowners = response.Records;

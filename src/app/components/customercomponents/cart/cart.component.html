@@ -1,0 +1,99 @@
+<app-header></app-header>
+<div class="flex">
+    <div class="w-full m-20 mt-2">
+      <div class="bg-white p-2 rounded-lg shadow mb-4 text-center border-b-4">
+          <h2 class="text-3xl font-bold mb-4">Your Cart</h2>
+      </div>
+
+      <div *ngIf="cartItems.size == 0">
+          <h3>Your Cart is Empty...!!</h3>
+      </div>
+      <div *ngIf="cartItems.size > 0" class="flex-col mt-5 ml-5 mr-5">
+
+        <div class="flex items-center mb-10">
+          <label for="claim" class="mr-3 font-semibold text-xl">Enter Medical Claim(if any):</label>
+          <input [(ngModel)]="claim" type="number" id="claim" name="claim" [min]="0" [max]="total" class="w-20 px-3 py-1 border border-gray-600 rounded-md" placeholder="Enter Claim Amt" />
+          <div (click)="save()" class="bg-blue-400 text-lg w-fit p-1 ml-3 px-5 border rounded-lg font-medium text-white text-md cursor-pointer hover:bg-blue-500">Save</div>
+        </div>
+
+        <table style="width: 100%; border-collapse: collapse;">
+          <thead>
+              <tr>
+                  <th style="border: 1px solid #ddd; padding: 8px;">Sr.No</th>
+                  <th style="border: 1px solid #ddd; padding: 8px;">Medicine Name</th>
+                  <th style="border: 1px solid #ddd; padding: 8px;">Unit Price</th>
+                  <th style="border: 1px solid #ddd; padding: 8px;">Quantity</th>
+                  <th colspan="2" style="border: 1px solid #ddd; padding: 8px;">Amount</th>
+                  <th style="border: 1px solid #ddd; padding: 8px;">Action</th>
+              </tr>
+          </thead>
+          <tbody>
+
+                  <tr *ngFor="let cart of cartItems.keys(); let index = index">
+                      <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{ index+1 }}</td>
+                      <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{ cart }}</td>
+                      <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{ priceMap.get(cart) }}</td>
+                      <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{ cartItems.get(cart) }}</td>
+                      <td colspan="2" class="font-semibold" style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{ amtMapper.get(cart) | number }}</td>
+
+                      <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">
+                        <button (click)="remove(cart)" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded mx-10 my-2">Remove</button>
+                      </td>
+
+                  </tr>
+
+                  <tr>
+                    <th colspan="1" style="border: 1px solid #ddd; padding: 35px;"></th>
+                    <th style="border: 1px solid #ddd; padding: 35px;">Total</th>
+                    <th colspan="2" style="border: 1px solid #ddd; padding: 35px;"></th>
+                    <th colspan="2" style="border: 1px solid #ddd; padding: 35px;">₹ {{total}}</th>
+                    <th style="border: 1px solid #ddd; padding: 35px;"></th>
+                  </tr>
+
+                  <tr>
+                    <th colspan="1" style="border: 1px solid #ddd; padding: 5px;"></th>
+                    <th class="font-medium" style="border: 1px solid #ddd; padding: 5px;">Delivery Charge</th>
+                    <th colspan="2" style="border: 1px solid #ddd; padding: 5px;"></th>
+                    <th colspan="2" class="font-medium" style="border: 1px solid #ddd; padding: 5px;">+ {{50}}</th>
+                    <th style="border: 1px solid #ddd; padding: 5px;"></th>
+                  </tr>
+
+                  <tr>
+                    <th colspan="1" style="border: 1px solid #ddd; padding: 5px;"></th>
+                    <th class="font-medium" style="border: 1px solid #ddd; padding: 5px;">Tax(15%)</th>
+                    <th colspan="2" style="border: 1px solid #ddd; padding: 5px;"></th>
+                    <th colspan="2" class="font-medium" style="border: 1px solid #ddd; padding: 5px;">+ {{total*0.15}}</th>
+                    <th style="border: 1px solid #ddd; padding: 5px;"></th>
+                  </tr>
+
+                  <tr>
+                    <th colspan="1" style="border: 1px solid #ddd; padding: 5px;"></th>
+                    <th class="font-medium" style="border: 1px solid #ddd; padding: 5px;">Net Amount</th>
+                    <th colspan="2" style="border: 1px solid #ddd; padding: 5px;"></th>
+                    <th colspan="2" class="font-medium" style="border: 1px solid #ddd; padding: 5px;">₹ {{total + 50 + total*0.15}}</th>
+                    <th style="border: 1px solid #ddd; padding: 5px;"></th>
+                  </tr>
+
+                  <tr>
+                    <th colspan="1" style="border: 1px solid #ddd; padding: 5px;"></th>
+                    <th class="font-medium" style="border: 1px solid #ddd; padding: 5px;">Med Claim</th>
+                    <th colspan="2" style="border: 1px solid #ddd; padding: 5px;"></th>
+                    <th *ngIf="claim >= 0 && claim <= total" colspan="2" class="font-medium" style="border: 1px solid #ddd; padding: 5px;">- {{actualClaim}}</th>
+                    <th style="border: 1px solid #ddd; padding: 5px;"></th>
+                  </tr>
+
+                  <tr>
+                    <th colspan="1" style="border: 1px solid #ddd; padding: 35px;"></th>
+                    <th class="text-xl" style="border: 1px solid #ddd; padding: 35px;">Grand Total</th>
+                    <th colspan="2" style="border: 1px solid #ddd; padding: 35px;"></th>
+                    <th colspan="2" class="text-xl" style="border: 1px solid #ddd; padding: 35px;">₹ {{(total + 50 + total*0.15) - actualClaim}}</th>
+                    <th>
+                      <div (click)="buyNow()" class="bg-green-500 text-white text-lg p-2 px-10 w-fit mx-auto border rounded-lg font-bold text-md cursor-pointer hover:bg-green-600">Buy Now</div>
+                    </th>
+                  </tr>
+
+          </tbody>
+      </table>
+      </div>
+    </div>
+</div>

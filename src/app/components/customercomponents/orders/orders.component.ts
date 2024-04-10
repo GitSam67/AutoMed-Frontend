@@ -5,29 +5,40 @@ import { Medicine } from '../../../Models/app.medicine.model';
 import { SecurityhttpService } from '../../../Services/securityhttp.service';
 import { StoreownerhttpService } from '../../../Services/storeownerhttp.service';
 import { CustomerhttpService } from '../../../Services/customerhttp.service';
+import { CommonModule } from '@angular/common';
+import { AdminhttpService } from '../../../Services/adminhttp.service';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-orders',
   standalone: true,
-  imports: [HeaderComponent],
+  imports: [HeaderComponent, CommonModule, RouterModule],
   templateUrl: './orders.component.html',
   styleUrl: './orders.component.css'
 })
 export class OrdersComponent implements OnInit{
   orders: Order[] = [];
   medicines: Medicine[];
-  token: any = "";
+  token: any;
   branchId: string = "";
+  branchName: Map<number, string>;
   customerId: number = 0;
-  constructor(private userService: SecurityhttpService, private strService: StoreownerhttpService, private customerService: CustomerhttpService){
+  customerName: any;
+  message: any;
+
+
+  constructor(private userService: SecurityhttpService, private strService: StoreownerhttpService, private customerService: CustomerhttpService, private adminService:AdminhttpService, private router:Router){
     this.orders = new Array<any>();
     this.medicines = new Array<any>();
+    this.branchName = new Map<number, string>();
   }
 
-  viewInvoice(orderId: any): void{
-    this.customerService.viewMedicalBill(this.customerId, orderId).subscribe({
+  viewInvoice(orderId: number): void{
+    console.log(orderId);
+    console.log(this.customerId);
+    this.customerService.viewMedicalBill(this.customerId, Number(orderId), this.token).subscribe({
       next:(response:any)=>{
-        console.log(response.message);
+        console.log(response);
       },
       error(error) {
         alert(`Error: ${error}`);
@@ -37,13 +48,17 @@ export class OrdersComponent implements OnInit{
 
   ngOnInit(): void {
     this.token = sessionStorage.getItem('token');
+    if(this.token == null) {
+      this.router.navigateByUrl('/login');
+    }
     this.userService.getUserInfo(this.token).subscribe({
     next:(response:any)=>{
       console.log(response);
-      this.branchId = response.BranchId;
       this.customerId = response.CustomerId;
+      this.customerName = response.CustomerName;
+      console.log(this.customerId);
 
-      this.strService.getSalesReport(this.branchId).subscribe({
+      this.strService.getSalesReport(0, this.token).subscribe({
         next:(response)=>{
           console.log(response);
           this.orders = response.Records;
@@ -59,8 +74,22 @@ export class OrdersComponent implements OnInit{
       console.log(`Error: ${error}`);
     }
   });
+
+  this.adminService.getBranches(this.token).subscribe({
+    next: (response) => {
+        console.log(response);
+        response.Records.forEach(record => {
+          this.branchName.set(record.BranchId, record.BranchName);
+        });
+    },
+    error: (error) => {
+      this.message = `Error: ${error}`;
+      alert("Error in fetching branch details. Please try again"+ this.message);
+    }
+  })
+
   }
 
-  
-  
+
+
 }

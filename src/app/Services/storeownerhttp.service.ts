@@ -1,11 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { APIResponse } from '../Models/app.apiresponse.model';
-import { Medicine } from '../Models/app.medicine.model';
-import { Branch } from '../Models/app.model';
-import { Order } from '../Models/app.orders.model';
-import { StoreOwner } from '../Models/app.user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,93 +14,98 @@ export class StoreownerhttpService {
   this.url='https://localhost:7243/'
  }
 
- placeOrder(orders:any, id:any):Observable<APIResponse<any>>{
+ placeOrder(orders:any, id:any,token:any):Observable<APIResponse<any>>{
     let response:Observable<APIResponse<any>>;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
     response=this.http.post<APIResponse<any>>(`${this.url}api/StoreOwner/PlaceOrder/${id}`, orders ,{
-      headers:{
-        'Content-Type':'application/json'
-      }
+      headers:headers
     });
     return response;
   }
 
-  removeStock(id:any, orders:any):Observable<APIResponse<any>>{
+  removeStock(id:any, orders:any,token:any):Observable<APIResponse<any>>{
     let response:Observable<APIResponse<any>>;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
     response=this.http.put<APIResponse<any>>(`${this.url}api/StoreOwner/RemoveStock/${id}`, orders ,{
-      headers:{
-        'Content-Type':'application/json'
-      }
+      headers:headers
     });
     return response;
   }
 
-  getInventory(id:any):Observable<APIResponse<any>>{
+  getInventory(id:any,token:any):Observable<APIResponse<any>>{
     let response:Observable<APIResponse<any>>;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
     response=this.http.get<APIResponse<any>>(`${this.url}api/StoreOwner/GetInventory/${id}`,{
-      headers:{
-        'Content-Type':'application/json'
-      }
+      headers:headers
     });
     return response;
   }
 
-  getCashBalance(id:any):Observable<APIResponse<any>>{
+  getCashBalance(id:any,token:any):Observable<APIResponse<any>>{
     let response:Observable<APIResponse<any>>;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
     response=this.http.get<APIResponse<any>>(`${this.url}api/StoreOwner/GetCashBalance/${id}`,{
-      headers:{
-        'Content-Type':'application/json'
-      }
+      headers:headers
     });
     return response;
   }
 
-  getTotalSales(id:any):Observable<APIResponse<any>>{
+  getTotalSales(id:any,token:any):Observable<APIResponse<any>>{
     let response:Observable<APIResponse<any>>;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
     response=this.http.get<APIResponse<any>>(`${this.url}api/StoreOwner/GetTotalSales/${id}`,{
-      headers:{
-        'Content-Type':'application/json'
-      }
+      headers:headers
     });
     return response;
   }
 
-  // getBranches():Observable<APIResponse<Branch>>{
-  //   let response:Observable<APIResponse<Branch>>;
-  //   response=this.http.get<APIResponse<Branch>>(`${this.url}api/SuperAdmin/GetBranches`,{
-  //     headers:{
-  //       'Content-Type':'application/json'
-  //     }
-  //   });
-  //   return response;
-  // }
-
-
-  getSalesReport(id:any):Observable<APIResponse<any>>{
+  getSalesReport(id:any,token:any):Observable<APIResponse<any>>{
     let response:Observable<APIResponse<any>>;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
     response=this.http.get<APIResponse<any>>(`${this.url}api/StoreOwner/GetSalesReport/${id}`,{
-      headers:{
-        'Content-Type':'application/json'
-      }
+      headers:headers
     });
     return response;
   }
 
-  checkForExpiry(id:any):Observable<APIResponse<any>>{
+  checkForExpiry(id:any,token:any):Observable<APIResponse<any>>{
     let response:Observable<APIResponse<any>>;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
     response=this.http.get<APIResponse<any>>(`${this.url}api/StoreOwner/CheckForExpiry/${id}`,{
-      headers:{
-        'Content-Type':'application/json'
-      }
+      headers:headers
     });
     return response;
   }
 
-  checkForStockLevel(id:any):Observable<APIResponse<any>>{
+  checkForStockLevel(id:any,token:any):Observable<APIResponse<any>>{
     let response:Observable<APIResponse<any>>;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
     response=this.http.get<APIResponse<any>>(`${this.url}api/StoreOwner/CheckForStockLevel/${id}`,{
-      headers:{
-        'Content-Type':'application/json'
-      }
+      headers:headers
     });
     return response;
   }

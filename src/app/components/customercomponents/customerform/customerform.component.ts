@@ -17,21 +17,18 @@ import { CommonModule } from '@angular/common';
 export class CustomerformComponent implements OnInit{
   branches: Branch[];
   message: string;
+  bloodGroup: string="";
   unsubmittable = true;
   customer: Customer;
   customerForm: FormGroup;
-  branchId: number;
   name: string;
   email: string;
-  claim: number;
 
   constructor(private adminServ: AdminhttpService, private customerServ: CustomerhttpService, private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router){
     this.branches = new Array<any>();
     this.message = "";
-    this.branchId = 0;
     this.name = "";
     this.email = "";
-    this.claim = 0;
     this.customer = new Customer(0, "", "", "", "", "", "", "", "");
     this.customerForm = this.formBuilder.group({
       age: new FormControl(this.customer.Age, Validators.compose([
@@ -42,14 +39,12 @@ export class CustomerformComponent implements OnInit{
       contactNo: new FormControl(this.customer.ContactNo, Validators.required),
       bloodGroup: new FormControl(this.customer.BloodGroup, Validators.required),
       address: new FormControl(this.customer.Address, Validators.required),
-      prescription: new FormControl(this.customer.Prescription, Validators.required),
-      claim: new FormControl(this.claim, Validators.compose([Validators.required, Validators.pattern('[0-9]+')]))
+      prescription: new FormControl(this.customer.Prescription, Validators.required)
     })
   }
 
   ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
+
     this.route.paramMap.subscribe(params => {
       const emailParam = params.get('email');
       const nameParam = params.get('name');
@@ -58,28 +53,14 @@ export class CustomerformComponent implements OnInit{
       if (emailParam !== null) {
         this.email = emailParam;
       }
-    
+
       if (nameParam !== null) {
         this.name = nameParam;
       }
     });
-    
-    this.adminServ.getBranches().subscribe({
-      next: (response) => {
-        this.branches = response.Records;
-        this.message = response.Message;
-        console.log(this.branches);
-        this.unsubmittable = false;
-      },
-      error: (error) => {
-        this.message = `Error: ${error}`;
-      }
-    });
-
   }
 
-  save(): void{
-    console.log(this.branchId);
+  save(): void {
     const newCust: Customer = {
       CustomerId: 0,
       CustomerName: sessionStorage.getItem('name'),
@@ -95,16 +76,14 @@ export class CustomerformComponent implements OnInit{
     this.customerServ.addCustomer(newCust).subscribe({
       next:(response) => {
         this.message = response.Message;
-        // console.log(this.message);
-        // alert("Details added successfully")
-        sessionStorage.setItem('branchId', JSON.stringify(this.branchId));
-        sessionStorage.setItem('claim', JSON.stringify(this.claim));
-        this.router.navigateByUrl('/customer');
+        console.log(this.message);
+        alert("Details added successfully")
+        this.router.navigateByUrl('/login');
       },
       error: (error) =>{
         this.message = error;
-        // console.log(this.message);
-        // alert(`Error occured : ${error}`);
+        console.log(this.message);
+        alert(`Error occured : ${error}`);
       }
     })
   }

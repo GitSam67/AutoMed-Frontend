@@ -26,7 +26,7 @@
                       <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{ order.OrderId }}</td>
                       <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{ order.CustomerId }}</td>
                       <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{ order.orders }}</td>
-                      <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{ order.PurchaseTime }}</td>
+                      <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{ order.PurchaseTime | date: "dd-MM-YYYY" }}</td>
                       <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{ order.TotalBill }}</td>
                       <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{ this.branchName.get(order.BranchId) }}</td>
                   </tr>

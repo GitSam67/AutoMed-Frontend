@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SadminsidepanelComponent } from '../../reusablecomponents/sadminsidepanel/sadminsidepanel.component';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { SuperadminheaderComponent } from '../../reusablecomponents/superadminheader/superadminheader.component';
 
 @Component({
@@ -10,6 +10,15 @@ import { SuperadminheaderComponent } from '../../reusablecomponents/superadminhe
   templateUrl: './superadmin.component.html',
   styleUrl: './superadmin.component.css'
 })
-export class SuperadminComponent {
+export class SuperadminComponent implements OnInit {
+  token:any;
 
+  constructor(private router:Router) {}
+
+  ngOnInit(): void {
+    this.token = sessionStorage.getItem('token');
+    if(this.token == null) {
+      this.router.navigateByUrl('/login');
+    }
+  }
 }

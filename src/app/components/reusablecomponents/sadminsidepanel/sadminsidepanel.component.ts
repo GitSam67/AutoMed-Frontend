@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminhttpService } from '../../../Services/adminhttp.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sadminsidepanel',
@@ -11,15 +12,20 @@ import { AdminhttpService } from '../../../Services/adminhttp.service';
 export class SadminsidepanelComponent implements OnInit {
   salesAmount: number;
   message:string;
+  token:any;
 
-  constructor(private adminservice:AdminhttpService){
+  constructor(private adminservice:AdminhttpService, private router: Router){
     this.salesAmount = 0;
     this.message = "";
   }
 
-  ngOnInit(): void {
-
-  this.adminservice.getSalesReport(0).subscribe({
+ngOnInit(): void {
+    this.token = sessionStorage.getItem('token');
+    if(this.token == null) {
+      this.router.navigateByUrl('/login');
+    }
+    console.log(this.token);
+    this.adminservice.getSalesReport(0, this.token).subscribe({
     next: (response) => {
       response.Records.forEach(record => {
         this.salesAmount += record.TotalBill;

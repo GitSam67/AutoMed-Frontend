@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Branch } from '../../../Models/app.model';
 import { AdminhttpService } from '../../../Services/adminhttp.service';
 import { FormsModule } from '@angular/forms';
@@ -11,13 +11,21 @@ import { Router } from '@angular/router';
   templateUrl: './branchdetailsform.component.html',
   styleUrl: './branchdetailsform.component.css'
 })
-export class BranchdetailsformComponent {
+export class BranchdetailsformComponent implements OnInit {
   branch: Branch;
   BranchName:string = '';
   Address:string = '';
+  token:any;
 
   constructor(private branchservice: AdminhttpService, private router: Router) {
     this.branch = new Branch(0, '', '');
+  }
+
+  ngOnInit(): void {
+    this.token = sessionStorage.getItem('token');
+    if(this.token == null) {
+      this.router.navigateByUrl('/login');
+    }
   }
 
   addBranch(): void {
@@ -29,7 +37,7 @@ export class BranchdetailsformComponent {
       Address: this.Address
     };
 
-    this.branchservice.addBranch(newBr).subscribe({
+    this.branchservice.addBranch(newBr, this.token).subscribe({
       next:(response)=>{
         this.branch = response.Record;
         alert(response.Message);

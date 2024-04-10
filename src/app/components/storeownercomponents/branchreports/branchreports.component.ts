@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { StoreownerhttpService } from '../../../Services/storeownerhttp.service';
 import { AdminhttpService } from '../../../Services/adminhttp.service';
 import { SecurityhttpService } from '../../../Services/securityhttp.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-branchreports',
@@ -22,19 +23,21 @@ export class BranchreportsComponent implements OnInit{
   branchId: number;
   token:any;
 
-  constructor(private strService: StoreownerhttpService, private adminservice:AdminhttpService, private userService:SecurityhttpService){
+  constructor(private strService: StoreownerhttpService, private adminservice:AdminhttpService, private userService:SecurityhttpService, private router:Router){
     this.branchName = new Map<number, string>();
     this.branchId = 0, this.token = '';
   }
   ngOnInit(): void {
-
     this.token = sessionStorage.getItem('token');
+    if(this.token == null) {
+      this.router.navigateByUrl('/login');
+    }
     this.userService.getUserInfo(this.token).subscribe({
     next:(response:any)=>{
       console.log(response);
       this.branchId = response.BranchId;
 
-      this.strService.getSalesReport(this.branchId).subscribe({
+      this.strService.getSalesReport(this.branchId, this.token).subscribe({
         next:(response)=>{
           console.log(response);
           this.orders = response.Records;
@@ -50,7 +53,7 @@ export class BranchreportsComponent implements OnInit{
   });
 
 
-  this.adminservice.getBranches().subscribe({
+  this.adminservice.getBranches(this.token).subscribe({
     next: (response) => {
         console.log(response);
         response.Records.forEach(record => {

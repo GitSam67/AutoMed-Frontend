@@ -13,11 +13,11 @@ import { FormsModule } from '@angular/forms';
 })
 export class RegisterComponent {
   user: AppUser;
-  name: string = '';
-  email: string = '';
+  name: any;
+  email: any;
   role: string = 'Customer';
-  password: string = '';
-  confirmPassword: string = '';
+  password: any;
+  confirmPassword: any;
 
   constructor(private securityService: SecurityhttpService, private router: Router) {
     this.user = new AppUser('', '', '', '', '');
@@ -25,10 +25,24 @@ export class RegisterComponent {
 
   register() {
 
+    if(this.name == null && this.email == null && this.password == null && this.confirmPassword == null) {
+      alert("Fields must be not null..!!");
+      return;
+    }
+
+    if (this.email) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(this.email)) {
+        alert('Invalid email format');
+        return;
+      }
+    }
+
     if (this.password !== this.confirmPassword) {
       console.log(this.password);
       console.log(this.confirmPassword);
       alert('Passwords do not match');
+      return;
     }
 
     const newUser: AppUser = {
@@ -51,7 +65,7 @@ export class RegisterComponent {
         const emailtoStore = this.email || "Default Email";
         const emailasString = String(emailtoStore);
         sessionStorage.setItem('email', emailasString);
-        this.router.navigate(['login'], {queryParams: { name: nameAsString , email: emailasString} });
+        this.router.navigate(['customerform'], {queryParams: { name: nameAsString , email: emailasString} });
       },
       error:(error)=>{
         alert(`Error: ${error}`);

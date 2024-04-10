@@ -15,8 +15,8 @@ import { CommonModule } from '@angular/common';
 export class LoginComponent{
   loginForm: FormGroup;
   user: LoginUser;
-  email: string = '';
-  password: string = '';
+  email: any;
+  password: any;
 
   constructor(private securityService: SecurityhttpService, private router: Router, private formBuilder: FormBuilder) {
     this.user = new LoginUser('', '');
@@ -28,6 +28,19 @@ export class LoginComponent{
 
 
   login(): void {
+
+    if(this.email == null && this.password == null) {
+      alert("Fields must be not null..!!");
+      return;
+    }
+
+    if (this.email) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(this.email)) {
+        alert('Invalid email format');
+        return;
+      }
+    }
 
     const authUser: LoginUser = {
       Email: this.email,
@@ -46,7 +59,7 @@ export class LoginComponent{
         else if(sessionStorage.getItem('role') == "StoreOwner")
           this.router.navigateByUrl('/storeowner');
         else if(sessionStorage.getItem('role') == "Customer")
-          this.router.navigateByUrl('/customerform');
+          this.router.navigateByUrl('/customer');
         else
           this.router.navigateByUrl('/');
       },

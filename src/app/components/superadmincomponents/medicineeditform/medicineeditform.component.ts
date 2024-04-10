@@ -22,9 +22,10 @@ export class MedicineeditformComponent implements OnInit{
   minDate: string;
   medId: any = 0;
   message:any;
+  token:any;
 
   constructor(private medservice: AdminhttpService, private router: Router) {
-    this.med = new Medicine(0, '', '', 0, '', new Date(), '');
+    this.med = new Medicine(0, '', 0, new Date(),'', '', '');
     this.Name = '',this.Manufacturer = '', this.UnitPrice = 0, this.BatchNumber = '', this.ExpiryDate = new Date(), this.Category = '';
 
     const today = new Date();
@@ -35,8 +36,12 @@ export class MedicineeditformComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    this.token = sessionStorage.getItem('token');
+    if(this.token == null) {
+      this.router.navigateByUrl('/login');
+    }
     this.medId = sessionStorage.getItem('medId');
-    this.medservice.getMedicine(this.medId).subscribe({
+    this.medservice.getMedicine(this.medId, this.token).subscribe({
       next: (response) => {
         console.log(response);
         this.Name = response.Record.Name;
@@ -67,7 +72,7 @@ export class MedicineeditformComponent implements OnInit{
       Category: this.Category
     };
 
-    this.medservice.updateMedicine(this.medId, newMed).subscribe({
+    this.medservice.updateMedicine(this.medId, newMed, this.token).subscribe({
       next:(response)=>{
         this.med = response.Record;
         alert(response.Message);

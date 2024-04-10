@@ -2,6 +2,7 @@ import { Branch } from './../../../Models/app.model';
 import { Component, OnInit } from '@angular/core';
 import { StoreownerhttpService } from '../../../Services/storeownerhttp.service';
 import { SecurityhttpService } from '../../../Services/securityhttp.service';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-storeownersidepanel',
@@ -16,7 +17,7 @@ export class StoreownersidepanelComponent implements OnInit{
   branchId: number;
   token:any;
 
- constructor(private strService: StoreownerhttpService, private userService: SecurityhttpService){
+ constructor(private strService: StoreownerhttpService, private userService: SecurityhttpService, private router:Router){
   this.cashbalance = 0;
   this.salesamount = 0;
   this.branchId = 0;
@@ -24,12 +25,14 @@ export class StoreownersidepanelComponent implements OnInit{
  }
 
  ngOnInit(): void {
-
   this.token = sessionStorage.getItem('token');
+  if(this.token == null) {
+    this.router.navigateByUrl('/login');
+  }
   this.userService.getUserInfo(this.token).subscribe({
     next:(response:any)=>{
       this.branchId = response.BranchId;
-      this.strService.getCashBalance(this.branchId).subscribe({
+      this.strService.getCashBalance(this.branchId, this.token).subscribe({
         next:(response:any)=>{
           console.log(response);
           this.cashbalance = response;
@@ -38,7 +41,7 @@ export class StoreownersidepanelComponent implements OnInit{
           alert(`Error: ${error}`);
         }
       });
-      this.strService.getTotalSales(this.branchId).subscribe({
+      this.strService.getTotalSales(this.branchId, this.token).subscribe({
         next:(response:any)=>{
           console.log(response);
           this.salesamount = response;

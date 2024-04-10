@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { AdminhttpService } from '../../../Services/adminhttp.service';
 import { SuperadminheaderComponent } from '../../reusablecomponents/superadminheader/superadminheader.component';
 import { SadminsidepanelComponent } from '../../reusablecomponents/sadminsidepanel/sadminsidepanel.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-reports',
@@ -17,8 +18,9 @@ export class ReportsComponent implements OnInit {
   salesAmount: number = 0;
   message: string;
   branchName: Map<number, string>;
+  token:any;
 
-  constructor(private adminservice:AdminhttpService) {
+  constructor(private adminservice:AdminhttpService, private router:Router) {
         this.orders = new Array<Order>();
         this.salesAmount = 0;
         this.message = "";
@@ -26,8 +28,11 @@ export class ReportsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    this.adminservice.getSalesReport(0).subscribe({
+    this.token = sessionStorage.getItem('token');
+    if(this.token == null) {
+      this.router.navigateByUrl('/login');
+    }
+    this.adminservice.getSalesReport(0, this.token).subscribe({
       next: (response) => {
         this.orders = response.Records;
         this.message = response.Message;
@@ -39,7 +44,7 @@ export class ReportsComponent implements OnInit {
       }
     })
 
-    this.adminservice.getBranches().subscribe({
+    this.adminservice.getBranches(this.token).subscribe({
       next: (response) => {
           console.log(response);
           response.Records.forEach(record => {

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { APIResponse } from '../Models/app.apiresponse.model';
@@ -18,154 +18,184 @@ export class AdminhttpService {
   this.url='https://localhost:7243/'
  }
 
- getStoreOwner():Observable<APIResponse<any>>{
+ getStoreOwner(token:any):Observable<APIResponse<any>>{
   console.log("service called");
     let response:Observable<APIResponse<any>>;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
     response=this.http.get<APIResponse<any>>(`${this.url}api/SuperAdmin/GetStoreOwners`,{
-      headers:{
-        'Content-Type':'application/json'
-      }
+      headers: headers
     });
     return response;
   }
 
-  getStoreOwnerDetail(id:any):Observable<APIResponse<any>>{
+  getStoreOwnerDetail(id:any,token:any):Observable<APIResponse<any>>{
     console.log("service called");
       let response:Observable<APIResponse<any>>;
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      });
       response=this.http.get<APIResponse<any>>(`${this.url}api/SuperAdmin/GetStoreOwners/${id}`,{
-        headers:{
-          'Content-Type':'application/json'
-        }
+        headers: headers
       });
       return response;
     }
 
-  addStoreOwner(owner:StoreOwner):Observable<APIResponse<any>>{
+  addStoreOwner(owner:StoreOwner,token:any):Observable<APIResponse<any>>{
     let response:Observable<APIResponse<any>>;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
     response=this.http.post<APIResponse<any>>(`${this.url}api/SuperAdmin/AddStoreOwner`, owner, {
-      headers:{
-        'Content-Type':'application/json'
-      }
+      headers: headers
     });
     return response;
   }
 
-  editStoreOwner(id:number, owner:StoreOwner):Observable<APIResponse<any>>{
+  editStoreOwner(id:number, owner:StoreOwner, token:any):Observable<APIResponse<any>>{
     let response:Observable<APIResponse<any>>;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
     response=this.http.put<APIResponse<any>>(`${this.url}api/SuperAdmin/EditStoreOwner/${id}`, owner, {
-      headers:{
-        'Content-Type':'application/json'
-      }
+      headers: headers
     });
     return response;
   }
 
-  deleteStoreOwner(id:number):Observable<APIResponse<any>>{
+  deleteStoreOwner(id:number, token:any):Observable<APIResponse<any>>{
     let response:Observable<APIResponse<any>>;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
     response=this.http.delete<APIResponse<any>>(`${this.url}api/SuperAdmin/DeleteStoreOwner/${id}`,{
-      headers:{
-        'Content-Type':'application/json'
-      }
+      headers: headers
     });
     return response;
   }
 
-  getBranches():Observable<APIResponse<any>>{
+  getBranches(token:any):Observable<APIResponse<any>>{
     let response:Observable<APIResponse<any>>;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
     response=this.http.get<APIResponse<any>>(`${this.url}api/SuperAdmin/GetBranches`,{
-      headers:{
-        'Content-Type':'application/json'
-      }
+      headers: headers
     });
     return response;
   }
 
-  addBranch(branch:Branch):Observable<APIResponse<any>>{
+  addBranch(branch:Branch, token:any):Observable<APIResponse<any>>{
     let response:Observable<APIResponse<any>>;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
     response=this.http.post<APIResponse<any>>(`${this.url}api/SuperAdmin/AddBranch`, branch, {
-      headers:{
-        'Content-Type':'application/json'
-      }
+      headers: headers
     });
     return response;
   }
 
-  updateBranch(id:number, branch:Branch):Observable<APIResponse<any>>{
+  updateBranch(id:number, branch:Branch, token:any):Observable<APIResponse<any>>{
     let response:Observable<APIResponse<any>>;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
     response=this.http.put<APIResponse<any>>(`${this.url}api/SuperAdmin/UpdateBranch/${id}`, branch, {
-      headers:{
-        'Content-Type':'application/json'
-      }
+      headers: headers
     });
     return response;
   }
 
-  deleteBranch(id:number):Observable<APIResponse<any>>{
+  deleteBranch(id:number, token:any):Observable<APIResponse<any>>{
     let response:Observable<APIResponse<any>>;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
     response=this.http.delete<APIResponse<any>>(`${this.url}api/SuperAdmin/DeleteBranch/${id}`, {
-      headers:{
-        'Content-Type':'application/json'
-      }
+      headers: headers
     });
     return response;
   }
 
-  getMedicines():Observable<APIResponse<any>>{
+  getMedicines(token:any):Observable<APIResponse<any>>{
     let response:Observable<APIResponse<any>>;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
     response=this.http.get<APIResponse<any>>(`${this.url}api/SuperAdmin/GetMedicine`,{
-      headers:{
-        'Content-Type':'application/json'
-      }
+      headers: headers
     });
     return response;
   }
 
-  getMedicine(id:any):Observable<APIResponse<any>>{
+  getMedicine(id:any, token:any):Observable<APIResponse<any>>{
     let response:Observable<APIResponse<any>>;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
     response=this.http.get<APIResponse<any>>(`${this.url}api/SuperAdmin/GetMedicine/${id}`,{
-      headers:{
-        'Content-Type':'application/json'
-      }
+      headers: headers
     });
     return response;
   }
 
-  addMedicine(med:Medicine):Observable<APIResponse<any>>{
+  addMedicine(med:Medicine, token:any):Observable<APIResponse<any>>{
     let response:Observable<APIResponse<any>>;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
     response=this.http.post<APIResponse<any>>(`${this.url}api/SuperAdmin/AddMedicine`, med, {
-      headers:{
-        'Content-Type':'application/json'
-      }
+      headers: headers
     });
     return response;
   }
 
-  updateMedicine(id:number, med:Medicine):Observable<APIResponse<any>>{
+  updateMedicine(id:number, med:Medicine, token:any):Observable<APIResponse<any>>{
     let response:Observable<APIResponse<any>>;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
     response=this.http.put<APIResponse<any>>(`${this.url}api/SuperAdmin/UpdateMedicine/${id}`, med , {
-      headers:{
-        'Content-Type':'application/json'
-      }
+      headers: headers
     });
     return response;
   }
 
-  deleteMedicine(id:number):Observable<APIResponse<any>>{
+  deleteMedicine(id:number, token:any):Observable<APIResponse<any>>{
     let response:Observable<APIResponse<any>>;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
     response=this.http.delete<APIResponse<any>>(`${this.url}api/SuperAdmin/RemoveMedicine/${id}`,{
-      headers:{
-        'Content-Type':'application/json'
-      }
+      headers:headers
     });
     return response;
   }
 
-  getSalesReport(id:any):Observable<APIResponse<any>>{
+  getSalesReport(id:any, token:any):Observable<APIResponse<any>>{
     let response:Observable<APIResponse<any>>;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
     response=this.http.get<APIResponse<any>>(`${this.url}api/SuperAdmin/GetSalesReport/${id}`,{
-      headers:{
-        'Content-Type':'application/json'
-      }
+      headers:headers
     });
     return response;
   }

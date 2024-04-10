@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Branch } from '../../../Models/app.model';
 import { SuperadminheaderComponent } from '../../reusablecomponents/superadminheader/superadminheader.component';
 import { AdminhttpService } from '../../../Services/adminhttp.service';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { Medicine } from '../../../Models/app.medicine.model';
+import { tick } from '@angular/core/testing';
 
 @Component({
   selector: 'app-branchdetails',
@@ -17,15 +18,20 @@ export class BranchdetailsComponent implements OnInit{
   message: string;
   canDelete: boolean = true;
   medicines: Medicine[];
+  token:any;
 
-  constructor(private adminservice:AdminhttpService){
+  constructor(private adminservice:AdminhttpService, private router:Router){
     this.message="";
     this.branches = new Array<any>();
     this.medicines = new Array<any>();
   }
 
   ngOnInit(): void {
-    this.adminservice.getBranches().subscribe({
+    this.token = sessionStorage.getItem('token');
+    if(this.token == null) {
+      this.router.navigateByUrl('/login');
+    }
+    this.adminservice.getBranches(this.token).subscribe({
       next: (response) => {
         this.branches = response.Records;
         this.message = response.Message;
@@ -39,7 +45,7 @@ export class BranchdetailsComponent implements OnInit{
   }
 
   editRow(id:number, branch:any): void{
-    this.adminservice.updateBranch(id, branch).subscribe({
+    this.adminservice.updateBranch(id, branch, this.token).subscribe({
       next: (response) => {
         console.log(response);
         this.branches = response.Records;
@@ -55,7 +61,7 @@ export class BranchdetailsComponent implements OnInit{
   }
   deleteRow(id:number): void{
     alert(`Confirm delete for branch with id: ${id} ?`);
-    this.adminservice.deleteBranch(id).subscribe({
+    this.adminservice.deleteBranch(id, this.token).subscribe({
       next: (response) => {
         console.log(response);
         this.branches = response.Records;
