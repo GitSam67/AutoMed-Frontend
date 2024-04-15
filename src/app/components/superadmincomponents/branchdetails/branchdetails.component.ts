@@ -19,6 +19,7 @@ export class BranchdetailsComponent implements OnInit{
   canDelete: boolean = true;
   medicines: Medicine[];
   token:any;
+  role:any;
 
   constructor(private adminservice:AdminhttpService, private router:Router){
     this.message="";
@@ -28,7 +29,8 @@ export class BranchdetailsComponent implements OnInit{
 
   ngOnInit(): void {
     this.token = sessionStorage.getItem('token');
-    if(this.token == null) {
+    this.role = sessionStorage.getItem('role');
+    if(this.token == null || this.role != 'SuperAdmin') {
       this.router.navigateByUrl('/login');
     }
     this.adminservice.getBranches(this.token).subscribe({

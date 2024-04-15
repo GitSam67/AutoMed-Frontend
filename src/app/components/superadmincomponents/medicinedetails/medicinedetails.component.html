@@ -24,12 +24,12 @@
           {
               <tr>
                   <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{ medicine.MedicineId }}</td>
-                  <td style="border: 1px solid #ddd; padding: 8px;">{{ medicine.Name }}</td>
-                  <td style="border: 1px solid #ddd; padding: 8px;">{{ medicine.Manufacturer }}</td>
-                  <td style="border: 1px solid #ddd; padding: 8px;">{{ medicine.UnitPrice }}</td>
-                  <td style="border: 1px solid #ddd; padding: 8px;">{{ medicine.BatchNumber }}</td>
-                  <td style="border: 1px solid #ddd; padding: 8px;">{{ medicine.ExpiryDate }}</td>
-                  <td style="border: 1px solid #ddd; padding: 8px;">{{ medicine.Category }}</td>
+                  <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{ medicine.Name }}</td>
+                  <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{ medicine.Manufacturer }}</td>
+                  <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{ medicine.UnitPrice }}</td>
+                  <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{ medicine.BatchNumber }}</td>
+                  <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{ medicine.ExpiryDate | date: "dd-MM-YYYY" }}</td>
+                  <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{ medicine.Category }}</td>
 
                     <td style="border: 1px solid #ddd; padding: 8px; text-align: center ;">
                         <button (click)="editRow(medicine.MedicineId)" class="px-10" style="padding: 10px; background-color: #1bd207; color: white; border: none; cursor: pointer; border-radius: 4px;">Edit</button>

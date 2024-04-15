@@ -23,6 +23,8 @@ export class CustomerformComponent implements OnInit{
   customerForm: FormGroup;
   name: string;
   email: string;
+  token: any;
+  role:any;
 
   constructor(private adminServ: AdminhttpService, private customerServ: CustomerhttpService, private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router){
     this.branches = new Array<any>();
@@ -44,6 +46,12 @@ export class CustomerformComponent implements OnInit{
   }
 
   ngOnInit(): void {
+
+    this.token = sessionStorage.getItem('token');
+    this.role = sessionStorage.getItem('role');
+    if(this.token == null || this.role != 'Customer') {
+      this.router.navigateByUrl('/login');
+    }
 
     this.route.paramMap.subscribe(params => {
       const emailParam = params.get('email');
@@ -73,12 +81,12 @@ export class CustomerformComponent implements OnInit{
       Prescription: this.customerForm.controls['prescription'].value
     };
 
-    this.customerServ.addCustomer(newCust).subscribe({
+    this.customerServ.addCustomer(newCust, this.token).subscribe({
       next:(response) => {
         this.message = response.Message;
         console.log(this.message);
         alert("Details added successfully")
-        this.router.navigateByUrl('/login');
+        this.router.navigateByUrl('/customer');
       },
       error: (error) =>{
         this.message = error;

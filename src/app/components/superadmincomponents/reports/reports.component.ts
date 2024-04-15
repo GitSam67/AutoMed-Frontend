@@ -19,6 +19,7 @@ export class ReportsComponent implements OnInit {
   message: string;
   branchName: Map<number, string>;
   token:any;
+  role:any;
 
   constructor(private adminservice:AdminhttpService, private router:Router) {
         this.orders = new Array<Order>();
@@ -29,7 +30,8 @@ export class ReportsComponent implements OnInit {
 
   ngOnInit(): void {
     this.token = sessionStorage.getItem('token');
-    if(this.token == null) {
+    this.role = sessionStorage.getItem('role');
+    if(this.token == null || this.role != 'SuperAdmin') {
       this.router.navigateByUrl('/login');
     }
     this.adminservice.getSalesReport(0, this.token).subscribe({

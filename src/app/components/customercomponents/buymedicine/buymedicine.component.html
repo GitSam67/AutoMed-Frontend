@@ -63,7 +63,12 @@
                   <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">{{ qtyMapper.get(medicine.MedicineId) }}</td>
 
                     <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">
+                      @if (selectBtn) {
                         <button (click)="selectMedicine(medicine.Name)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-10 my-2">Select</button>
+                      }
+                      @else {
+                        <button [disabled]="true" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-10 my-2">Select</button>
+                      }
                     </td>
               </tr>
             }

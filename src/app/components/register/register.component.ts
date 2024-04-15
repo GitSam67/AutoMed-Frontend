@@ -65,7 +65,7 @@ export class RegisterComponent {
         const emailtoStore = this.email || "Default Email";
         const emailasString = String(emailtoStore);
         sessionStorage.setItem('email', emailasString);
-        this.router.navigate(['customerform'], {queryParams: { name: nameAsString , email: emailasString} });
+        this.router.navigate(['login'], {queryParams: { name: nameAsString , email: emailasString} });
       },
       error:(error)=>{
         alert(`Error: ${error}`);

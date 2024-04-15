@@ -36,6 +36,8 @@ export class BuymedicineComponent implements OnInit {
   priceMapper: Map<any, any>;
   branchMapper:  Map<number, string>;
   branchSelect:boolean = false;
+  selectBtn: boolean = false;
+  role:any = '';
 
   constructor(private adminService: AdminhttpService, private customerService: CustomerhttpService, private router: Router){
     this.medicines = new Array<any>();
@@ -70,7 +72,8 @@ export class BuymedicineComponent implements OnInit {
 
   ngOnInit(): void {
     this.token = sessionStorage.getItem('token');
-    if(this.token == null) {
+    this.role = sessionStorage.getItem('role');
+    if(this.token == null || this.role != 'Customer') {
       this.router.navigateByUrl('/login');
     }
     this.adminService.getBranches(this.token).subscribe({
@@ -103,10 +106,20 @@ export class BuymedicineComponent implements OnInit {
       }
     });
 
-  }
+    let serialized = localStorage.getItem('cartItems');
+    if (serialized) {
+      let arrayFromStorage = JSON.parse(serialized);
+      this.selectedMedicines = new Map<string, number>(arrayFromStorage);
+      console.log(this.selectedMedicines);
+    }
 
-  onBranchIdChange(): void {
-    console.log(this.branchId);
+    this.branchId = sessionStorage.getItem('branchId');
+    if(this.selectedMedicines.size > 0) {
+      this.branchSelect = true;
+      this.branchIdVar = Number(this.branchId);
+      console.log(this.branchIdVar);
+      console.log(this.branchMapper.get(this.branchIdVar));
+    }
     this.customerService.checkAvailability(this.branchId, this.token).subscribe({
       next: (response: any) => {
         this.availableMedicines = response.Records;
@@ -114,6 +127,26 @@ export class BuymedicineComponent implements OnInit {
         this.availableMedicines.forEach(record => {
           this.qtyMapper.set(record.MedicineId, record.Quantity);
         });
+        this.selectBtn = true;
+      },
+      error: (error) => {
+        this.message = `Error: ${error}`;
+      }
+    });
+
+  }
+
+  onBranchIdChange(): void {
+    console.log(this.branchId);
+    sessionStorage.setItem('branchId', this.branchId);
+    this.customerService.checkAvailability(this.branchId, this.token).subscribe({
+      next: (response: any) => {
+        this.availableMedicines = response.Records;
+        console.log(this.availableMedicines);
+        this.availableMedicines.forEach(record => {
+          this.qtyMapper.set(record.MedicineId, record.Quantity);
+        });
+        this.selectBtn = true;
       },
       error: (error) => {
         this.message = `Error: ${error}`;
@@ -124,7 +157,9 @@ export class BuymedicineComponent implements OnInit {
   selectMedicine(med:any){
     this.selectMed = !this.selectMed;
     this.name = med;
+    this.branchSelect = true;
     this.branchIdVar = Number(this.branchId);
+    console.log(this.branchIdVar);
     console.log(this.branchMapper.get(Number(this.branchId)));
   }
 
@@ -139,9 +174,6 @@ export class BuymedicineComponent implements OnInit {
     let arrayFromPriceMap = Array.from(this.priceMapper.entries());
     let serializedPriceMap = JSON.stringify(arrayFromPriceMap);
     localStorage.setItem('priceMapper', serializedPriceMap);
-
-
-    sessionStorage.setItem('branchId', this.branchId);
 
     this.router.navigateByUrl('/cart');
 }

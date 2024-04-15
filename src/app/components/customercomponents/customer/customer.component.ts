@@ -12,12 +12,14 @@ import { Router } from '@angular/router';
 })
 export class CustomerComponent implements OnInit {
   token:any;
+  role:any = '';
 
   constructor(private router:Router) {}
 
   ngOnInit(): void {
     this.token = sessionStorage.getItem('token');
-    if(this.token == null) {
+    this.role = sessionStorage.getItem('role');
+    if(this.token == null || this.role != 'Customer') {
       this.router.navigateByUrl('/login');
     }
   }

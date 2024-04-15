@@ -3,11 +3,12 @@ import { Component } from '@angular/core';
 import { Medicine } from '../../../Models/app.medicine.model';
 import { SuperadminheaderComponent } from '../../reusablecomponents/superadminheader/superadminheader.component';
 import { Router, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-medicinedetails',
   standalone: true,
-  imports: [SuperadminheaderComponent, RouterModule],
+  imports: [SuperadminheaderComponent, RouterModule, CommonModule],
   templateUrl: './medicinedetails.component.html',
   styleUrl: './medicinedetails.component.css'
 })
@@ -15,6 +16,7 @@ export class MedicinedetailsComponent {
   medicines: Medicine[];
   message: string;
   token:any;
+  role:any;
 
   constructor(private adminservice: AdminhttpService, private router:Router){
     this.medicines = new Array<any>();
@@ -23,7 +25,8 @@ export class MedicinedetailsComponent {
 
   ngOnInit(): void {
     this.token = sessionStorage.getItem('token');
-    if(this.token == null) {
+    this.role = sessionStorage.getItem('role');
+    if(this.token == null || this.role != 'SuperAdmin') {
       this.router.navigateByUrl('/login');
     }
     this.adminservice.getMedicines(this.token).subscribe({

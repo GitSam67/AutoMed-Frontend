@@ -18,27 +18,30 @@ import { BranchreportsComponent } from './components/storeownercomponents/branch
 import { StoreownereditformComponent } from './components/superadmincomponents/storeownereditform/storeownereditform.component';
 import { MedicineeditformComponent } from './components/superadmincomponents/medicineeditform/medicineeditform.component';
 import { CartComponent } from './components/customercomponents/cart/cart.component';
+import { customerGuard } from './customer.guard';
+import { superadminGuard } from './superadmin.guard';
+import { storeownerGuard } from './storeowner.guard';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'customer', component: CustomerComponent},
-  { path: "superadmin", component: SuperadminComponent},
-  { path: "storeownerdetails", component: StoreownerdetailsComponent},
-  { path: "storeownerform", component: StoreownerformComponent},
-  {path: "storeownereditform", component: StoreownereditformComponent},
-  { path: "branchdetails", component: BranchdetailsComponent},
-  { path: "branchdetailsform", component: BranchdetailsformComponent},
-  { path: "medicinedetails", component: MedicinedetailsComponent},
-  { path: "medicinedetailsform", component: MedicinedetailsformComponent},
-  {path: "medicineeditform", component: MedicineeditformComponent},
-  { path: "branchreports", component: BranchreportsComponent},
-  { path: "storeowner", component: StoreownerComponent},
-  { path: "inventory", component: InventoryComponent},
-  { path: "reports", component: ReportsComponent},
-  { path: 'customerform', component: CustomerformComponent},
-  { path: 'orders', component: OrdersComponent},
-  {path: 'cart', component: CartComponent},
+  { path: 'customer', component: CustomerComponent, canActivate:[customerGuard]},
+  { path: "superadmin", component: SuperadminComponent, canActivate:[superadminGuard]},
+  { path: "storeownerdetails", component: StoreownerdetailsComponent, canActivate:[superadminGuard]},
+  { path: "storeownerform", component: StoreownerformComponent, canActivate:[superadminGuard]},
+  {path: "storeownereditform", component: StoreownereditformComponent, canActivate:[superadminGuard]},
+  { path: "branchdetails", component: BranchdetailsComponent, canActivate:[superadminGuard]},
+  { path: "branchdetailsform", component: BranchdetailsformComponent, canActivate:[superadminGuard]},
+  { path: "medicinedetails", component: MedicinedetailsComponent, canActivate:[superadminGuard]},
+  { path: "medicinedetailsform", component: MedicinedetailsformComponent, canActivate:[superadminGuard]},
+  {path: "medicineeditform", component: MedicineeditformComponent, canActivate:[superadminGuard]},
+  { path: "branchreports", component: BranchreportsComponent, canActivate:[storeownerGuard]},
+  { path: "storeowner", component: StoreownerComponent, canActivate:[storeownerGuard]},
+  { path: "inventory", component: InventoryComponent, canActivate:[storeownerGuard]},
+  { path: "reports", component: ReportsComponent, canActivate:[superadminGuard]},
+  { path: 'customerform', component: CustomerformComponent, canActivate:[customerGuard]},
+  { path: 'orders', component: OrdersComponent, canActivate:[customerGuard]},
+  {path: 'cart', component: CartComponent, canActivate:[customerGuard]},
   { path: '', redirectTo: '/register', pathMatch: 'full' },
   { path: '**', redirectTo: '/login' }
 ];

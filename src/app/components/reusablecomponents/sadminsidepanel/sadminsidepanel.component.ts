@@ -13,6 +13,7 @@ export class SadminsidepanelComponent implements OnInit {
   salesAmount: number;
   message:string;
   token:any;
+  role:any;
 
   constructor(private adminservice:AdminhttpService, private router: Router){
     this.salesAmount = 0;
@@ -21,7 +22,8 @@ export class SadminsidepanelComponent implements OnInit {
 
 ngOnInit(): void {
     this.token = sessionStorage.getItem('token');
-    if(this.token == null) {
+    this.role = sessionStorage.getItem('role');
+    if(this.token == null || this.role != 'SuperAdmin') {
       this.router.navigateByUrl('/login');
     }
     console.log(this.token);

@@ -12,11 +12,12 @@ import { CommonModule } from '@angular/common';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent{
+export class LoginComponent implements OnInit{
   loginForm: FormGroup;
   user: LoginUser;
   email: any;
   password: any;
+  name: any;
 
   constructor(private securityService: SecurityhttpService, private router: Router, private formBuilder: FormBuilder) {
     this.user = new LoginUser('', '');
@@ -26,6 +27,10 @@ export class LoginComponent{
     });
   }
 
+  ngOnInit(): void {
+    this.name = sessionStorage.getItem('name');
+    this.email = sessionStorage.getItem('email');
+  }
 
   login(): void {
 
@@ -58,8 +63,24 @@ export class LoginComponent{
           this.router.navigateByUrl('/superadmin');
         else if(sessionStorage.getItem('role') == "StoreOwner")
           this.router.navigateByUrl('/storeowner');
-        else if(sessionStorage.getItem('role') == "Customer")
-          this.router.navigateByUrl('/customer');
+        else if(sessionStorage.getItem('role') == "Customer") {
+          this.securityService.getUserInfo(response.Token).subscribe({
+            next:(res)=>{
+              console.log(res);
+              if(res == null) {
+                sessionStorage.setItem('name', this.name);
+                sessionStorage.setItem('email', this.email);
+                this.router.navigateByUrl('/customerform');
+              }
+              else
+                this.router.navigateByUrl('/customer');
+            },
+            error:(error)=>{
+              alert(`Error occured..!! Please Try again`);
+            }
+          })
+
+        }
         else
           this.router.navigateByUrl('/');
       },

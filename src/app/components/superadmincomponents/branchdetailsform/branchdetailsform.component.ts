@@ -16,6 +16,7 @@ export class BranchdetailsformComponent implements OnInit {
   BranchName:any;
   Address:any;
   token:any;
+  role:any;
 
   constructor(private branchservice: AdminhttpService, private router: Router) {
     this.branch = new Branch(0, '', '');
@@ -23,7 +24,8 @@ export class BranchdetailsformComponent implements OnInit {
 
   ngOnInit(): void {
     this.token = sessionStorage.getItem('token');
-    if(this.token == null) {
+    this.role = sessionStorage.getItem('role');
+    if(this.token == null || this.role != 'SuperAdmin') {
       this.router.navigateByUrl('/login');
     }
   }

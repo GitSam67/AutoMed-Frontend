@@ -16,6 +16,7 @@ export class StoreownersidepanelComponent implements OnInit{
   salesamount: number;
   branchId: number;
   token:any;
+  role:any;
 
  constructor(private strService: StoreownerhttpService, private userService: SecurityhttpService, private router:Router){
   this.cashbalance = 0;
@@ -26,7 +27,8 @@ export class StoreownersidepanelComponent implements OnInit{
 
  ngOnInit(): void {
   this.token = sessionStorage.getItem('token');
-  if(this.token == null) {
+  this.role = sessionStorage.getItem('role');
+  if(this.token == null || this.role != 'StoreOwner') {
     this.router.navigateByUrl('/login');
   }
   this.userService.getUserInfo(this.token).subscribe({

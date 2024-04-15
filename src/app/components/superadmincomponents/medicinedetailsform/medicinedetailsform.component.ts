@@ -21,6 +21,7 @@ export class MedicinedetailsformComponent implements OnInit {
   Category: any;
   minDate: any;
   token:any;
+  role:any;
 
   constructor(private medservice: AdminhttpService, private router: Router) {
     this.med = new Medicine(0, '', 0, new Date(), '', '', '');
@@ -35,7 +36,8 @@ export class MedicinedetailsformComponent implements OnInit {
 
   ngOnInit(): void {
     this.token = sessionStorage.getItem('token');
-    if(this.token == null) {
+    this.role = sessionStorage.getItem('role');
+    if(this.token == null || this.role != 'SuperAdmin') {
       this.router.navigateByUrl('/login');
     }
   }

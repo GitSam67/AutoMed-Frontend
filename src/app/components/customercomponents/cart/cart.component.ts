@@ -27,6 +27,7 @@ export class CartComponent implements OnInit {
   token:any;
   customerId: number = 0;
   message:any;
+  role: any = '';
 
   constructor(private userService:SecurityhttpService, private customerService: CustomerhttpService, private router:Router){
     this.cartItems = new Map<string, number>();
@@ -36,7 +37,8 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
     this.token = sessionStorage.getItem('token');
-    if(this.token == null) {
+    this.role = sessionStorage.getItem('role');
+    if(this.token == null || this.role != 'Customer') {
       this.router.navigateByUrl('/login');
     }
 
@@ -86,6 +88,10 @@ export class CartComponent implements OnInit {
   buyNow(): void{
 
     this.branchId = Number(sessionStorage.getItem('branchId'));
+    if(this.branchId == null || this.branchId == 0) {
+      alert("Select branch to buy from..!!");
+      return;
+    }
     this.userService.getUserInfo(this.token).subscribe({
     next:(response:any)=>{
       console.log(response);
@@ -102,6 +108,7 @@ export class CartComponent implements OnInit {
           next: (response) => {
             console.log(response);
             alert(`Purchase Amount of ₹ ${response} executed successfully..!!`);
+            localStorage.removeItem('cartItems');
             this.router.navigateByUrl('/orders');
           },
           error: (error) => {

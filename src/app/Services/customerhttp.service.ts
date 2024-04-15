@@ -16,12 +16,14 @@ export class CustomerhttpService {
   this.url='https://localhost:7243/'
  }
 
- addCustomer(customer:Customer):Observable<APIResponse<any>>{
+ addCustomer(customer:Customer, token:any):Observable<APIResponse<any>>{
     let response:Observable<APIResponse<any>>;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
     response=this.http.post<APIResponse<any>>(`${this.url}api/Customer/AddCustomer`, customer ,{
-      headers:{
-        'Content-Type':'application/json'
-      }
+      headers:headers
     });
     return response;
   }

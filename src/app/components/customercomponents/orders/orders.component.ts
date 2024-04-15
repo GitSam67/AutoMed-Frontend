@@ -25,6 +25,7 @@ export class OrdersComponent implements OnInit{
   customerId: number = 0;
   customerName: any;
   message: any;
+  role:any;
 
 
   constructor(private userService: SecurityhttpService, private strService: StoreownerhttpService, private customerService: CustomerhttpService, private adminService:AdminhttpService, private router:Router){
@@ -48,7 +49,8 @@ export class OrdersComponent implements OnInit{
 
   ngOnInit(): void {
     this.token = sessionStorage.getItem('token');
-    if(this.token == null) {
+    this.role = sessionStorage.getItem('role');
+    if(this.token == null || this.role != 'Customer') {
       this.router.navigateByUrl('/login');
     }
     this.userService.getUserInfo(this.token).subscribe({
